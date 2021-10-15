@@ -1,327 +1,327 @@
-'From Cuis 5.0 [latest update: #4928] on 15 October 2021 at 6:38:42 pm'!
+'From Cuis 5.0 [latest update: #4928] on 16 October 2021 at 12:12:30 am'!
 'Description '!
-!provides: 'Postgres' 1 1!
+!provides: 'Postgres' 1 2!
 !requires: 'Cuis-Base' 50 4928 nil!
-SystemOrganization addCategory: 'Postgres'!
+SystemOrganization addCategory: #Postgres!
 
 
-!classDefinition: #PGUnsupportedAuthentication category: 'Postgres'!
+!classDefinition: #PGUnsupportedAuthentication category: #Postgres!
 Error subclass: #PGUnsupportedAuthentication
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGUnsupportedAuthentication class' category: 'Postgres'!
+!classDefinition: 'PGUnsupportedAuthentication class' category: #Postgres!
 PGUnsupportedAuthentication class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGActiveObject category: 'Postgres'!
+!classDefinition: #PGActiveObject category: #Postgres!
 Object subclass: #PGActiveObject
 	instanceVariableNames: 'trace state events'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGActiveObject class' category: 'Postgres'!
+!classDefinition: 'PGActiveObject class' category: #Postgres!
 PGActiveObject class
 	instanceVariableNames: 'stateTransitionTable'!
 
-!classDefinition: #PGConnection category: 'Postgres'!
+!classDefinition: #PGConnection category: #Postgres!
 PGActiveObject subclass: #PGConnection
 	instanceVariableNames: 'socket readBuffer readIndex lastReadIndex writeBuffer processId secretKey sql functionCallOid functionCallArgs copyStream result connectionArgs notificationSubscribers fieldConverters'
 	classVariableNames: 'DefaultConnectionArgs DefaultTraceLevel'
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGConnection class' category: 'Postgres'!
+!classDefinition: 'PGConnection class' category: #Postgres!
 PGConnection class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGNotificationSubscriber category: 'Postgres'!
+!classDefinition: #PGNotificationSubscriber category: #Postgres!
 PGActiveObject subclass: #PGNotificationSubscriber
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGNotificationSubscriber class' category: 'Postgres'!
+!classDefinition: 'PGNotificationSubscriber class' category: #Postgres!
 PGNotificationSubscriber class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGConnectionArgs category: 'Postgres'!
+!classDefinition: #PGConnectionArgs category: #Postgres!
 Object subclass: #PGConnectionArgs
 	instanceVariableNames: 'hostname portno databaseName userName password extraArgs debugTty'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGConnectionArgs class' category: 'Postgres'!
+!classDefinition: 'PGConnectionArgs class' category: #Postgres!
 PGConnectionArgs class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGPacket category: 'Postgres'!
+!classDefinition: #PGPacket category: #Postgres!
 Object subclass: #PGPacket
 	instanceVariableNames: ''
 	classVariableNames: 'PacketClasses'
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGPacket class' category: 'Postgres'!
+!classDefinition: 'PGPacket class' category: #Postgres!
 PGPacket class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGAbstractStringResponse category: 'Postgres'!
+!classDefinition: #PGAbstractStringResponse category: #Postgres!
 PGPacket subclass: #PGAbstractStringResponse
 	instanceVariableNames: 'value'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGAbstractStringResponse class' category: 'Postgres'!
+!classDefinition: 'PGAbstractStringResponse class' category: #Postgres!
 PGAbstractStringResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGCompletedResponse category: 'Postgres'!
+!classDefinition: #PGCompletedResponse category: #Postgres!
 PGAbstractStringResponse subclass: #PGCompletedResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGCompletedResponse class' category: 'Postgres'!
+!classDefinition: 'PGCompletedResponse class' category: #Postgres!
 PGCompletedResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGCursorResponse category: 'Postgres'!
+!classDefinition: #PGCursorResponse category: #Postgres!
 PGAbstractStringResponse subclass: #PGCursorResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGCursorResponse class' category: 'Postgres'!
+!classDefinition: 'PGCursorResponse class' category: #Postgres!
 PGCursorResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGEmptyQueryResponse category: 'Postgres'!
+!classDefinition: #PGEmptyQueryResponse category: #Postgres!
 PGAbstractStringResponse subclass: #PGEmptyQueryResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGEmptyQueryResponse class' category: 'Postgres'!
+!classDefinition: 'PGEmptyQueryResponse class' category: #Postgres!
 PGEmptyQueryResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGErrorResponse category: 'Postgres'!
+!classDefinition: #PGErrorResponse category: #Postgres!
 PGAbstractStringResponse subclass: #PGErrorResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGErrorResponse class' category: 'Postgres'!
+!classDefinition: 'PGErrorResponse class' category: #Postgres!
 PGErrorResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGNoticeResponse category: 'Postgres'!
+!classDefinition: #PGNoticeResponse category: #Postgres!
 PGAbstractStringResponse subclass: #PGNoticeResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGNoticeResponse class' category: 'Postgres'!
+!classDefinition: 'PGNoticeResponse class' category: #Postgres!
 PGNoticeResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGAsciiRow category: 'Postgres'!
+!classDefinition: #PGAsciiRow category: #Postgres!
 PGPacket subclass: #PGAsciiRow
 	instanceVariableNames: 'description nullFields rawData'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGAsciiRow class' category: 'Postgres'!
+!classDefinition: 'PGAsciiRow class' category: #Postgres!
 PGAsciiRow class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGBinaryRow category: 'Postgres'!
+!classDefinition: #PGBinaryRow category: #Postgres!
 PGAsciiRow subclass: #PGBinaryRow
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGBinaryRow class' category: 'Postgres'!
+!classDefinition: 'PGBinaryRow class' category: #Postgres!
 PGBinaryRow class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGAuthentication category: 'Postgres'!
+!classDefinition: #PGAuthentication category: #Postgres!
 PGPacket subclass: #PGAuthentication
 	instanceVariableNames: 'type salt'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGAuthentication class' category: 'Postgres'!
+!classDefinition: 'PGAuthentication class' category: #Postgres!
 PGAuthentication class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGBackendKeyData category: 'Postgres'!
+!classDefinition: #PGBackendKeyData category: #Postgres!
 PGPacket subclass: #PGBackendKeyData
 	instanceVariableNames: 'processId secretKey'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGBackendKeyData class' category: 'Postgres'!
+!classDefinition: 'PGBackendKeyData class' category: #Postgres!
 PGBackendKeyData class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGCancelRequest category: 'Postgres'!
+!classDefinition: #PGCancelRequest category: #Postgres!
 PGPacket subclass: #PGCancelRequest
 	instanceVariableNames: 'processId secretKey'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGCancelRequest class' category: 'Postgres'!
+!classDefinition: 'PGCancelRequest class' category: #Postgres!
 PGCancelRequest class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGColumnDescription category: 'Postgres'!
+!classDefinition: #PGColumnDescription category: #Postgres!
 PGPacket subclass: #PGColumnDescription
 	instanceVariableNames: 'fieldName typeOid typeSize typeModifier'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGColumnDescription class' category: 'Postgres'!
+!classDefinition: 'PGColumnDescription class' category: #Postgres!
 PGColumnDescription class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGCopyInResponse category: 'Postgres'!
+!classDefinition: #PGCopyInResponse category: #Postgres!
 PGPacket subclass: #PGCopyInResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGCopyInResponse class' category: 'Postgres'!
+!classDefinition: 'PGCopyInResponse class' category: #Postgres!
 PGCopyInResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGCopyOutResponse category: 'Postgres'!
+!classDefinition: #PGCopyOutResponse category: #Postgres!
 PGPacket subclass: #PGCopyOutResponse
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGCopyOutResponse class' category: 'Postgres'!
+!classDefinition: 'PGCopyOutResponse class' category: #Postgres!
 PGCopyOutResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGFunctionCall category: 'Postgres'!
+!classDefinition: #PGFunctionCall category: #Postgres!
 PGPacket subclass: #PGFunctionCall
 	instanceVariableNames: 'oid arguments'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGFunctionCall class' category: 'Postgres'!
+!classDefinition: 'PGFunctionCall class' category: #Postgres!
 PGFunctionCall class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGFunctionResultResponse category: 'Postgres'!
+!classDefinition: #PGFunctionResultResponse category: #Postgres!
 PGPacket subclass: #PGFunctionResultResponse
 	instanceVariableNames: 'result'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGFunctionResultResponse class' category: 'Postgres'!
+!classDefinition: 'PGFunctionResultResponse class' category: #Postgres!
 PGFunctionResultResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGNotificationResponse category: 'Postgres'!
+!classDefinition: #PGNotificationResponse category: #Postgres!
 PGPacket subclass: #PGNotificationResponse
 	instanceVariableNames: 'processId conditionName'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGNotificationResponse class' category: 'Postgres'!
+!classDefinition: 'PGNotificationResponse class' category: #Postgres!
 PGNotificationResponse class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGPasswordPacket category: 'Postgres'!
+!classDefinition: #PGPasswordPacket category: #Postgres!
 PGPacket subclass: #PGPasswordPacket
 	instanceVariableNames: 'password'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGPasswordPacket class' category: 'Postgres'!
+!classDefinition: 'PGPasswordPacket class' category: #Postgres!
 PGPasswordPacket class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGQuery category: 'Postgres'!
+!classDefinition: #PGQuery category: #Postgres!
 PGPacket subclass: #PGQuery
 	instanceVariableNames: 'queryString'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGQuery class' category: 'Postgres'!
+!classDefinition: 'PGQuery class' category: #Postgres!
 PGQuery class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGReadyForQuery category: 'Postgres'!
+!classDefinition: #PGReadyForQuery category: #Postgres!
 PGPacket subclass: #PGReadyForQuery
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGReadyForQuery class' category: 'Postgres'!
+!classDefinition: 'PGReadyForQuery class' category: #Postgres!
 PGReadyForQuery class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGRowDescription category: 'Postgres'!
+!classDefinition: #PGRowDescription category: #Postgres!
 PGPacket subclass: #PGRowDescription
 	instanceVariableNames: 'resultSet numberOfColumns columnDescriptions'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGRowDescription class' category: 'Postgres'!
+!classDefinition: 'PGRowDescription class' category: #Postgres!
 PGRowDescription class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGStartupPacket category: 'Postgres'!
+!classDefinition: #PGStartupPacket category: #Postgres!
 PGPacket subclass: #PGStartupPacket
 	instanceVariableNames: 'version databaseName userName extraArgs debugTty'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGStartupPacket class' category: 'Postgres'!
+!classDefinition: 'PGStartupPacket class' category: #Postgres!
 PGStartupPacket class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGTerminate category: 'Postgres'!
+!classDefinition: #PGTerminate category: #Postgres!
 PGPacket subclass: #PGTerminate
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGTerminate class' category: 'Postgres'!
+!classDefinition: 'PGTerminate class' category: #Postgres!
 PGTerminate class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGResult category: 'Postgres'!
+!classDefinition: #PGResult category: #Postgres!
 Object subclass: #PGResult
 	instanceVariableNames: 'connection resultSets errorResponse functionResult'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGResult class' category: 'Postgres'!
+!classDefinition: 'PGResult class' category: #Postgres!
 PGResult class
 	instanceVariableNames: ''!
 
-!classDefinition: #PGResultSet category: 'Postgres'!
+!classDefinition: #PGResultSet category: #Postgres!
 Object subclass: #PGResultSet
 	instanceVariableNames: 'result completedResponse rowDescription rows'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGResultSet class' category: 'Postgres'!
+!classDefinition: 'PGResultSet class' category: #Postgres!
 PGResultSet class
 	instanceVariableNames: ''!
 
-!classDefinition: #TestPGConnection category: 'Postgres'!
+!classDefinition: #TestPGConnection category: #Postgres!
 TestCase subclass: #TestPGConnection
 	instanceVariableNames: 'useConnectionDefaults notificationSubscriberCount'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'TestPGConnection class' category: 'Postgres'!
+!classDefinition: 'TestPGConnection class' category: #Postgres!
 TestPGConnection class
 	instanceVariableNames: ''!
 
@@ -1046,13 +1046,19 @@ stSendingCleartextPassword: event
 	self sendPacket: (PGPasswordPacket password: connectionArgs password) on: socket.
 ! !
 
-!PGConnection methodsFor: 'private-states' stamp: 'yj 1/31/2006 18:57'!
+!PGConnection methodsFor: 'private-states' stamp: 'NM 10/16/2021 00:00:55'!
 stSendingMD5Password: event 
 	"MD5 authentication as explain in http://archives.postgresql.org/pgsql-novice/2003-05/msg00305.php"
 	| hashedCredentials hashedMessage |
 
-	hashedCredentials := (MD5 hashMessage: (connectionArgs password, connectionArgs userName)) hex asLowercase.
-	hashedMessage := 'md5', (MD5 hashMessage: (hashedCredentials, event salt asString)) hex asLowercase.
+
+	hashedCredentials := (WebUtils md5Digest: (connectionArgs password, connectionArgs userName)) asLowercase.
+	hashedMessage := 'md5', (WebUtils md5Digest: (hashedCredentials, event salt asString)) asLowercase.
+
+       "
+	hashedCredentials := (WebUtils md5Digest: (connectionArgs password, connectionArgs userName)) hex asLowercase.
+	hashedMessage := 'md5', (WebUtils md5Digest: (hashedCredentials, event salt asString)) hex asLowercase.
+        "
 
 	self	sendPacket: (PGPasswordPacket password: hashedMessage) on: socket.
 ! !
@@ -1426,26 +1432,35 @@ hostname: host portno: port databaseName: database userName: user password: pwd 
 eventName
 	^self subclassResponsibility! !
 
-!PGPacket methodsFor: 'receiving' stamp: 'yj 4/24/2003 23:01'!
+!PGPacket methodsFor: 'receiving' stamp: 'NM 10/16/2021 00:11:58'!
 readBitmap: nbits from: connection
 
 	| nbytes bitmap |
 
 	nbytes := (nbits + 7) // 8.
 	bitmap := ByteArray new: nbytes.
-	1 to: nbytes do: [:i |
-		bitmap at: i put: connection next codePoint.
+	1 to: nbytes do: [:i | |b|
+		"bitmap at: i put: connection next codePoint."
+		b _ connection next codePoint.
+		bitmap at: i put: b.
 	].
 	^bitmap
 ! !
 
-!PGPacket methodsFor: 'receiving' stamp: 'yj 1/31/2006 18:15'!
+!PGPacket methodsFor: 'receiving' stamp: 'NM 10/16/2021 00:07:14'!
 readByteN: n from: connection
 
 	| bytes |
 
 	bytes := ByteArray new: n.
-	1 to: n do: [:i | bytes byteAt: i put: connection next codePoint].
+	1 to: n do:  [ :i | |b|
+		b _ connection next codePoint .
+		Transcript log: ('DBG> next byte code: {1}' format: {b.} ).
+		bytes byteAt: i put: b.
+		].
+	
+	" 1 to: n do: [:i | bytes at: i put: connection next codePoint]. "
+	
 	^bytes! !
 
 !PGPacket methodsFor: 'receiving' stamp: 'yj 4/24/2003 23:01'!
@@ -1633,6 +1648,15 @@ eventName
 eventName
 	^#NoticeResponse! !
 
+!PGAsciiRow methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
+displayOn: aStream
+
+	rawData withIndexDo: [:each :i |
+		aStream nextPutAll: (each == nil ifTrue: ['0'] ifFalse: [each]).
+		i < rawData size ifTrue: [aStream space].
+	].
+! !
+
 !PGAsciiRow methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 data
 
@@ -1676,15 +1700,6 @@ eventName
 !PGAsciiRow methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 rawData
 	^ rawData! !
-
-!PGAsciiRow methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
-displayOn: aStream
-
-	rawData withIndexDo: [:each :i |
-		aStream nextPutAll: (each == nil ifTrue: ['0'] ifFalse: [each]).
-		i < rawData size ifTrue: [aStream space].
-	].
-! !
 
 !PGAsciiRow methodsFor: 'initialize' stamp: 'yj 4/24/2003 23:01'!
 initialize
@@ -1894,6 +1909,18 @@ eventName
 eventName
 	^#CopyOutResponse! !
 
+!PGFunctionCall methodsFor: 'printing' stamp: 'yj 11/12/2004 18:18'!
+writeOn: aStream
+
+	self writeByte: $F on: aStream.
+	self writeString: '' on: aStream.
+	self writeInt32: self oid on: aStream.
+	self writeInt32: self arguments size on: aStream.
+	self arguments do: [:arg |
+		self writeInt32: arg size on: aStream.
+		arg do: [:b | self writeByte: (Character value: b) on: aStream].
+	]! !
+
 !PGFunctionCall methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 arguments
 	^arguments! !
@@ -1909,18 +1936,6 @@ oid
 !PGFunctionCall methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 oid: value
 	oid := value! !
-
-!PGFunctionCall methodsFor: 'printing' stamp: 'yj 11/12/2004 18:18'!
-writeOn: aStream
-
-	self writeByte: $F on: aStream.
-	self writeString: '' on: aStream.
-	self writeInt32: self oid on: aStream.
-	self writeInt32: self arguments size on: aStream.
-	self arguments do: [:arg |
-		self writeInt32: arg size on: aStream.
-		arg do: [:b | self writeByte: (Character value: b) on: aStream].
-	]! !
 
 !PGFunctionCall methodsFor: 'private-initialize' stamp: 'yj 4/24/2003 23:01'!
 setOid: anInteger arguments: anArray
@@ -2053,6 +2068,15 @@ sql: aString
 eventName
 	^#ReadyForQuery! !
 
+!PGRowDescription methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
+displayOn: aStream
+
+	columnDescriptions withIndexDo: [:each :i |
+		each displayOn: aStream.
+		i < columnDescriptions size ifTrue: [aStream space].
+	].
+! !
+
 !PGRowDescription methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 columnDescriptions
 	^ columnDescriptions! !
@@ -2072,15 +2096,6 @@ resultSet
 !PGRowDescription methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
 resultSet: anObject
 	resultSet := anObject! !
-
-!PGRowDescription methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
-displayOn: aStream
-
-	columnDescriptions withIndexDo: [:each :i |
-		each displayOn: aStream.
-		i < columnDescriptions size ifTrue: [aStream space].
-	].
-! !
 
 !PGRowDescription methodsFor: 'initialize' stamp: 'yj 4/24/2003 23:01'!
 initialize
