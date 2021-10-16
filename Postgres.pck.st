@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4928] on 16 October 2021 at 12:12:30 am'!
+'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 1:38:08 am'!
 'Description '!
-!provides: 'Postgres' 1 2!
+!provides: 'Postgres' 1 4!
 !requires: 'Cuis-Base' 50 4928 nil!
 SystemOrganization addCategory: #Postgres!
 
@@ -13,6 +13,16 @@ Error subclass: #PGUnsupportedAuthentication
 	category: 'Postgres'!
 !classDefinition: 'PGUnsupportedAuthentication class' category: #Postgres!
 PGUnsupportedAuthentication class
+	instanceVariableNames: ''!
+
+!classDefinition: #APostgres category: #Postgres!
+Object subclass: #APostgres
+	instanceVariableNames: 'password'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'APostgres class' category: #Postgres!
+APostgres class
 	instanceVariableNames: ''!
 
 !classDefinition: #PGActiveObject category: #Postgres!
@@ -450,6 +460,72 @@ printOn: aStream
 		nextPutAll: ',debugTty='; nextPutAll: debugTty printString;
 		nextPutAll: ',version='; nextPutAll: version printString;
 		nextPutAll: ')'
+! !
+
+!APostgres class methodsFor: 'documentation' stamp: 'NM 10/17/2021 01:27:26'!
+README
+	"
+. To start using this package see the information on the gitHub Web page
+ or the examples i put in this class, ot the test cases.	
+
+. TODO. we should be able to do `con terminate` but it does not work.
+On the other side, it seems not harful since running `$> lsof -i 4` in Linux
+and a few times 
+APostgres n1FirstSelect
+APostgres n.2ListDatabases
+..
+You can see the socket list growing in `$> lsof -i 4` but once you do `Smalltalk garbageCollect .`
+they all do disappear.  
+
+
+	"! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:00:40'!
+n1FirstSelect
+	". First Select example 
+	. Need to have a proper proper Postgres setup, Dabatabase and table. 
+	" 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 							password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	con openSocket . 
+	out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'. 
+	con closeSocket .
+	^ out 
+
+! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:14:46'!
+n2ListDatabases
+	". Get a list of available databases, equivalent to: psql> \d+  " 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	con openSocket . 
+	out _ con listDatabases . 
+	con closeSocket .
+	^ out 
+! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:15:57'!
+n3ListDatabasesPlus
+	". Get a list of available databases, equivalent to: psql> \d+  " 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	con openSocket . 
+	out _ con listDatabasesPlus . 
+	con closeSocket .
+	^ out 
 ! !
 
 !PGActiveObject methodsFor: 'private-sa' stamp: 'yj 4/24/2003 23:01'!
@@ -935,6 +1011,47 @@ initialize
 	result := PGResult on: self.
 
 	"^ self"
+! !
+
+!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 01:13:58'!
+listDatabases 
+	". Equivalent to command psql> \l+ "
+	|cmd|
+	cmd _ '
+	SELECT d.datname as "Name",
+       pg_catalog.pg_get_userbyid(d.datdba) as "Owner",
+       pg_catalog.pg_encoding_to_char(d.encoding) as "Encoding",
+       d.datcollate as "Collate",
+       d.datctype as "Ctype",
+       pg_catalog.array_to_string(d.datacl, E''\n'') AS "Access privileges"
+FROM pg_catalog.pg_database d
+ORDER BY 1;
+	'.
+	^ self execute: cmd. 
+! !
+
+!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 01:13:33'!
+listDatabasesPlus 
+	". Equivalent to command psql> \l+ "
+	|cmd|
+	cmd _ '
+	SELECT d.datname as "Name",
+       pg_catalog.pg_get_userbyid(d.datdba) as "Owner",
+       pg_catalog.pg_encoding_to_char(d.encoding) as "Encoding",
+       d.datcollate as "Collate",
+       d.datctype as "Ctype",
+       pg_catalog.array_to_string(d.datacl, E''\n'') AS "Access privileges",
+       CASE WHEN pg_catalog.has_database_privilege(d.datname, ''CONNECT'')
+            THEN pg_catalog.pg_size_pretty(pg_catalog.pg_database_size(d.datname))
+            ELSE ''No Access''
+       END as "Size",
+       t.spcname as "Tablespace",
+       pg_catalog.shobj_description(d.oid, ''pg_database'') as "Description"
+FROM pg_catalog.pg_database d
+  JOIN pg_catalog.pg_tablespace t on d.dattablespace = t.oid
+ORDER BY 1;
+	'.
+	^ self execute: cmd. 
 ! !
 
 !PGConnection methodsFor: 'private-states' stamp: 'yj 4/24/2003 23:01'!
