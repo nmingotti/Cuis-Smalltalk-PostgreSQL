@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 1:38:08 am'!
+'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 10:52:34 am'!
 'Description '!
-!provides: 'Postgres' 1 4!
+!provides: 'Postgres' 1 5!
 !requires: 'Cuis-Base' 50 4928 nil!
 SystemOrganization addCategory: #Postgres!
 
@@ -336,11 +336,21 @@ TestPGConnection class
 	instanceVariableNames: ''!
 
 
-!PGConnection commentStamp: 'yj 4/24/2003 23:05' prior: 0!
+!APostgres commentStamp: '<historical>' prior: 0!
+Helper class to collect documentation, notes, test, and hints.
+!
+
+!PGConnection commentStamp: '<historical>' prior: 0!
 Copyright (c) 2001-2003 by Yanni Chiu. All Rights Reserved.
 
 Instances of PGConnection implement a client interface to a PostgreSQL backend.
-See the "Frontend/Backend Protocol" chapter in the "PostgreSQL Programmer's Guide" for more information.!
+See the "Frontend/Backend Protocol" chapter in the "PostgreSQL Programmer's Guide" for more information.
+
+As of 2021 this part is documented in the Postgres Manual, Parrt VII - Internals. [NM]
+
+ 
+
+!
 
 !PGPacket methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
 printOn: aStream
@@ -480,7 +490,7 @@ they all do disappear.
 
 	"! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:00:40'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 10:36:19'!
 n1FirstSelect
 	". First Select example 
 	. Need to have a proper proper Postgres setup, Dabatabase and table. 
@@ -493,7 +503,9 @@ n1FirstSelect
 	con startup .
 	con openSocket . 
 	out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'. 
-	con closeSocket .
+	"con closeSocket ."
+	con closeSocket .	
+	"con terminate." 
 	^ out 
 
 ! !
@@ -525,6 +537,20 @@ n3ListDatabasesPlus
 	con openSocket . 
 	out _ con listDatabasesPlus . 
 	con closeSocket .
+	^ out 
+! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 10:48:34'!
+n4ListDatabases
+	". Get a list of available databases, equivalent to: psql> \d+  " 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	out _ con listDatabases . 
+	con terminate.
 	^ out 
 ! !
 
