@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4928] on 17 October 2021 at 5:56:29 pm'!
+'From Cuis 5.0 [latest update: #4928] on 17 October 2021 at 7:20:04 pm'!
 'Description '!
-!provides: 'Postgres' 1 14!
+!provides: 'Postgres' 1 15!
 !requires: 'Cuis-Base' 50 4928 nil!
 !requires: 'WebClient' 1 22 nil!
 !requires: 'SqueakCompatibility' 1 31 nil!
@@ -472,6 +472,41 @@ printOn: aStream
 		nextPutAll: ',debugTty='; nextPutAll: debugTty printString;
 		nextPutAll: ',version='; nextPutAll: version printString;
 		nextPutAll: ')'
+! !
+
+!APostgres methodsFor: 'tests' stamp: 'NM 10/17/2021 18:20:39'!
+test1CreateTable
+	|con arg out| 
+	". a basic table with a few typical data column types "
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
+						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
+	con connectionArgs: arg.
+	con startup .
+	out _ con execute: '
+		CREATE TABLE file_table (
+		    birth TIMESTAMP,
+  		    path VARCHAR(4096) PRIMARY KEY,
+  		    size INTEGER NOT NULL,
+		    rnd REAL    
+               );
+	'. 
+	con terminate.
+	^ out ! !
+
+!APostgres methodsFor: 'tests' stamp: 'NM 10/17/2021 18:15:01'!
+test2CheckTableTest1Exists
+	|con arg out| 
+	". a basic table with a few typical data column types "
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
+						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
+	con connectionArgs: arg.
+	con startup .
+	out _ con listRelations .
+	con terminate.
+	^ out 
+					
 ! !
 
 !APostgres class methodsFor: 'documentation' stamp: 'NM 10/17/2021 01:27:26'!
@@ -2615,22 +2650,22 @@ valueAt: fieldName
 	rows == nil ifTrue: [^ nil].
 	^ (rows at: 1) rawData at: i! !
 
-!PGResultSet methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
+!PGResultSet methodsFor: 'printing' stamp: 'NM 10/17/2021 19:17:47'!
 displayResultSetOn: aStream
 
 	completedResponse isNil ifFalse: [
 		completedResponse displayOn: aStream.
-		aStream cr.
+		aStream nextPut: Character lf.
 	].
 	rowDescription isNil ifFalse: [
 		self displayRowDescriptionOn: aStream.
-		aStream cr; nextPutAll: '----------'; cr.
+		aStream nextPut: Character lf; nextPutAll: '----------'; nextPut: Character lf.
 		self displayRowsOn: aStream.
 		aStream nextPut: $(.
 		rows size printOn: aStream.
 		aStream nextPutAll: ' row'.
 		rows size > 1 ifTrue: [aStream nextPut: $s].
-		aStream nextPut: $); cr; cr.
+		aStream nextPut: $); nextPut: Character lf  ; nextPut: Character lf.
 	].
 ! !
 
@@ -2640,10 +2675,10 @@ displayRowDescriptionOn: aStream
 	rowDescription displayOn: aStream.
 ! !
 
-!PGResultSet methodsFor: 'printing' stamp: 'yj 4/24/2003 23:01'!
+!PGResultSet methodsFor: 'printing' stamp: 'NM 10/17/2021 19:18:34'!
 displayRowsOn: aStream
 
-	rows do: [:each | each displayOn: aStream. aStream cr.].
+	rows do: [:each | each displayOn: aStream. aStream nextPut: Character newLineCharacter ].
 ! !
 
 !PGResultSet methodsFor: 'initialize' stamp: 'yj 4/24/2003 23:01'!
