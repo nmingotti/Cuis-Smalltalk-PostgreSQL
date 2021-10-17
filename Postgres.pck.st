@@ -1,7 +1,9 @@
-'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 11:43:38 am'!
+'From Cuis 5.0 [latest update: #4928] on 17 October 2021 at 12:34:13 pm'!
 'Description '!
-!provides: 'Postgres' 1 7!
+!provides: 'Postgres' 1 13!
 !requires: 'Cuis-Base' 50 4928 nil!
+!requires: 'WebClient' 1 22 nil!
+!requires: 'SqueakCompatibility' 1 31 nil!
 SystemOrganization addCategory: #Postgres!
 
 
@@ -490,7 +492,7 @@ they all do disappear.
 
 	"! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 10:36:19'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 11:48:47'!
 n1FirstSelect
 	". First Select example 
 	. Need to have a proper proper Postgres setup, Dabatabase and table. 
@@ -501,31 +503,27 @@ n1FirstSelect
 	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 							password: 'nicola'.  
 	con connectionArgs: arg.
 	con startup .
-	con openSocket . 
 	out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'. 
-	"con closeSocket ."
-	con closeSocket .	
-	"con terminate." 
+	con terminate.
 	^ out 
 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:14:46'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 11:58:40'!
 n2ListDatabases
-	". Get a list of available databases, equivalent to: psql> \d+  " 
+	". Get a list of available databases, equivalent to: psql> \d  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
 	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
 	con connectionArgs: arg.
 	con startup .
-	con openSocket . 
 	out _ con listDatabases . 
-	con closeSocket .
+	con terminate. 
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 01:15:57'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:02:11'!
 n3ListDatabasesPlus
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
@@ -534,14 +532,13 @@ n3ListDatabasesPlus
 	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
 	con connectionArgs: arg.
 	con startup .
-	con openSocket . 
 	out _ con listDatabasesPlus . 
-	con closeSocket .
+	con terminate.
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 10:48:34'!
-n4ListDatabases
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:01:43'!
+n3ListDatabasesPlusBROKEN
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
 	
@@ -549,7 +546,35 @@ n4ListDatabases
 	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
 	con connectionArgs: arg.
 	con startup .
-	out _ con listDatabases . 
+	out _ con listDatabasesPlus . 
+	con terminate.
+	^ out 
+! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:31:00'!
+n4ListRelations
+	". Get a list of available databases, equivalent to: psql> \d+  " 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	out _ con listRelations .
+	con terminate.
+	^ out 
+! !
+
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:31:12'!
+n5ListRelationsPlus
+	". Get a list of available databases, equivalent to: psql> \d+  " 
+	|con arg out| 
+	
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	con connectionArgs: arg.
+	con startup .
+	out _ con listRelationsPlus .
 	con terminate.
 	^ out 
 ! !
@@ -1071,12 +1096,11 @@ ORDER BY 1;
 	^ self execute: cmd. 
 ! !
 
-!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 01:13:33'!
+!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 12:26:34'!
 listDatabasesPlus 
 	". Equivalent to command psql> \l+ "
 	|cmd|
-	cmd _ '
-	SELECT d.datname as "Name",
+	cmd _  'SELECT d.datname as "Name",
        pg_catalog.pg_get_userbyid(d.datdba) as "Owner",
        pg_catalog.pg_encoding_to_char(d.encoding) as "Encoding",
        d.datcollate as "Collate",
@@ -1091,8 +1115,51 @@ listDatabasesPlus
 FROM pg_catalog.pg_database d
   JOIN pg_catalog.pg_tablespace t on d.dattablespace = t.oid
 ORDER BY 1;
-	'.
+' .
 	^ self execute: cmd. 
+! !
+
+!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 12:29:28'!
+listRelations 
+	". Equivalent to command psql> \d "
+	|cmd|
+	cmd _  'SELECT n.nspname as "Schema",
+  c.relname as "Name",
+  CASE c.relkind WHEN ''r'' THEN ''table'' WHEN ''v'' THEN ''view'' WHEN ''m'' THEN ''materialized view'' WHEN ''i'' THEN ''index'' WHEN ''S'' THEN ''sequence'' WHEN ''s'' THEN ''special'' WHEN ''f'' THEN ''foreign table'' WHEN ''p'' THEN ''partitioned table'' WHEN ''I'' THEN ''partitioned index'' END as "Type",
+  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+FROM pg_catalog.pg_class c
+     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN (''r'',''p'',''v'',''m'',''S'',''f'','''')
+      AND n.nspname <> ''pg_catalog''
+      AND n.nspname <> ''information_schema''
+      AND n.nspname !!~ ''^pg_toast''
+  AND pg_catalog.pg_table_is_visible(c.oid)
+ORDER BY 1,2;
+' .
+ 	^ self execute: cmd. 
+! !
+
+!PGConnection methodsFor: 'backslash-commands' stamp: 'NM 10/17/2021 12:29:53'!
+listRelationsPlus 
+	". Equivalent to command psql> \d+ "
+	|cmd|
+	cmd _  'SELECT n.nspname as "Schema",
+  c.relname as "Name",
+  CASE c.relkind WHEN ''r'' THEN ''table'' WHEN ''v'' THEN ''view'' WHEN ''m'' THEN ''materialized view'' WHEN ''i'' THEN ''index'' WHEN ''S'' THEN ''sequence'' WHEN ''s'' THEN ''special'' WHEN ''f'' THEN ''foreign table'' WHEN ''p'' THEN ''partitioned table'' WHEN ''I'' THEN ''partitioned index'' END as "Type",
+  pg_catalog.pg_get_userbyid(c.relowner) as "Owner",
+  CASE c.relpersistence WHEN ''p'' THEN ''permanent'' WHEN ''t'' THEN ''temporary'' WHEN ''u'' THEN ''unlogged'' END as "Persistence",
+  pg_catalog.pg_size_pretty(pg_catalog.pg_table_size(c.oid)) as "Size",
+  pg_catalog.obj_description(c.oid, ''pg_class'') as "Description"
+FROM pg_catalog.pg_class c
+     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN (''r'',''p'',''v'',''m'',''S'',''f'','''')
+      AND n.nspname <> ''pg_catalog''
+      AND n.nspname <> ''information_schema''
+      AND n.nspname !!~ ''^pg_toast''
+  AND pg_catalog.pg_table_is_visible(c.oid)
+ORDER BY 1,2;
+'.
+ 	^ self execute: cmd. 
 ! !
 
 !PGConnection methodsFor: 'private-states' stamp: 'yj 4/24/2003 23:01'!
@@ -1590,17 +1657,18 @@ hostname: host portno: port databaseName: database userName: user password: pwd 
 eventName
 	^self subclassResponsibility! !
 
-!PGPacket methodsFor: 'receiving' stamp: 'NM 10/16/2021 00:11:58'!
+!PGPacket methodsFor: 'receiving' stamp: 'NM 10/17/2021 11:54:05'!
 readBitmap: nbits from: connection
 
 	| nbytes bitmap |
 
 	nbytes := (nbits + 7) // 8.
 	bitmap := ByteArray new: nbytes.
-	1 to: nbytes do: [:i | |b|
+	1 to: nbytes do: [:i | |b1 b2 |
 		"bitmap at: i put: connection next codePoint."
-		b _ connection next codePoint.
-		bitmap at: i put: b.
+		b1 _ connection next.
+		b2 _ b1 asciiValue.  
+		bitmap at: i put: b2.
 	].
 	^bitmap
 ! !
