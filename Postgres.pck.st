@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 10:52:34 am'!
+'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 11:31:57 am'!
 'Description '!
-!provides: 'Postgres' 1 5!
+!provides: 'Postgres' 1 6!
 !requires: 'Cuis-Base' 50 4928 nil!
 SystemOrganization addCategory: #Postgres!
 
@@ -645,9 +645,20 @@ logIdString
 	^ self class name, '(', self hash printString, ')'.
 ! !
 
-!PGActiveObject methodsFor: 'trace' stamp: 'yj 4/24/2003 23:01'!
+!PGActiveObject methodsFor: 'trace' stamp: 'NM 10/17/2021 11:02:01'!
 logInfo: text
-
+	|st|
+	st _ (String new: 1000) writeStream .
+	st nextPut: $[;
+	    nextPutAll: self logIdString;
+	    nextPut: $];
+	    space;
+	    nextPutAll: text.
+	Transcript log: (st contents ).
+	
+	
+		
+"
 	Transcript
 		nextPut: $[;
 		nextPutAll: self logIdString;
@@ -656,6 +667,10 @@ logInfo: text
 		nextPutAll: text;
 		cr;
 		flush.
+
+"
+	
+
 ! !
 
 !PGActiveObject methodsFor: 'trace' stamp: 'yj 4/24/2003 23:01'!
@@ -1590,16 +1605,18 @@ readBitmap: nbits from: connection
 	^bitmap
 ! !
 
-!PGPacket methodsFor: 'receiving' stamp: 'NM 10/16/2021 00:07:14'!
+!PGPacket methodsFor: 'receiving' stamp: 'NM 10/17/2021 11:30:16'!
 readByteN: n from: connection
 
 	| bytes |
 
 	bytes := ByteArray new: n.
-	1 to: n do:  [ :i | |b|
-		b _ connection next codePoint .
-		Transcript log: ('DBG> next byte code: {1}' format: {b.} ).
-		bytes byteAt: i put: b.
+	1 to: n do:  [ :i | |b1 b2|
+		b1 _ connection next.
+		"b2 _ b1 codePoint ."
+		b2 _ b1 asInteger. 
+		"Transcript log: ('DBG> next {1} --> byte code: {2}' format: {b1. b2.} ). "
+		bytes byteAt: i put: b2.
 		].
 	
 	" 1 to: n do: [:i | bytes at: i put: connection next codePoint]. "
