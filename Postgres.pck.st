@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 11:31:57 am'!
+'From Cuis 5.0 [latest update: #4929] on 17 October 2021 at 11:43:38 am'!
 'Description '!
-!provides: 'Postgres' 1 6!
+!provides: 'Postgres' 1 7!
 !requires: 'Cuis-Base' 50 4928 nil!
 SystemOrganization addCategory: #Postgres!
 
@@ -1605,16 +1605,20 @@ readBitmap: nbits from: connection
 	^bitmap
 ! !
 
-!PGPacket methodsFor: 'receiving' stamp: 'NM 10/17/2021 11:30:16'!
+!PGPacket methodsFor: 'receiving' stamp: 'NM 10/17/2021 11:42:58'!
 readByteN: n from: connection
-
+	". connection next probably reads in more than one single byte chunk
+	. The caracter red can have value > 255, we must cut it to write 
+	 it in a ByteArray. 
+	"
 	| bytes |
 
 	bytes := ByteArray new: n.
 	1 to: n do:  [ :i | |b1 b2|
 		b1 _ connection next.
-		"b2 _ b1 codePoint ."
-		b2 _ b1 asInteger. 
+		"b2 _ b1 codePoint .    not goo in Cuis, output values > 255 do happen. "
+		"b2 _ b1 asInteger.     ok, this works "
+		b2 _ b1 asciiValue .     "this converts finally to latin-1"
 		"Transcript log: ('DBG> next {1} --> byte code: {2}' format: {b1. b2.} ). "
 		bytes byteAt: i put: b2.
 		].
