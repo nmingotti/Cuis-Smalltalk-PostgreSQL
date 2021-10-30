@@ -76,8 +76,8 @@ psql> CREATE USER foo WITH PASSWORD 'foopass';
 psql> GRANT ALL PRIVILEGES ON DATABASE test1 to foo;
 psql> \q
 ```
-* The you need to make database *foo* accessible from the network, add these lines at the end of file */etc/postgresql/XX/main/pg_hba.conf 
-* They say whoever on the network can reach this database authentication with password, hashed via *md5*.
+* Then you need to make database *foo* accessible from the network, add these lines at the end of file */etc/postgresql/XX/main/pg_hba.conf*. 
+They say whoever on the network can reach this database authentication with password, hashed via *md5*. 
 ```
 host "test1" foo 0.0.0.0/0 md5
 host "test1" foo ::/0          md5
