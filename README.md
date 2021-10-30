@@ -8,7 +8,7 @@ has a more general scope than this one, for example it can connect to SQlite. I 
 ## Minimal interaction example 
 
 ```smalltalk
-Feature require: 'Postgres'. 
+Feature require: 'PostgreSQL'. 
 
 ". get data from the a database "
 con _ PGConnection new.
