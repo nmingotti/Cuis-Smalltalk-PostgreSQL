@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 6:10:20 pm'!
+'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 9:53:20 pm'!
 'Description '!
-!provides: 'Postgres' 1 18!
+!provides: 'Postgres' 1 20!
 !requires: 'Cuis-Base' 50 4928 nil!
 !requires: 'WebClient' 1 22 nil!
 !requires: 'SqueakCompatibility' 1 31 nil!
@@ -1202,60 +1202,20 @@ runRegressionTests
 	]."
 ! !
 
-!APostgres methodsFor: 'tests' stamp: 'NM 10/17/2021 18:20:39'!
-test1CreateTable
-	|con arg out| 
-	". a basic table with a few typical data column types "
-	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
-						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
-	con connectionArgs: arg.
-	con startup .
-	out _ con execute: '
-		CREATE TABLE file_table (
-		    birth TIMESTAMP,
-  		    path VARCHAR(4096) PRIMARY KEY,
-  		    size INTEGER NOT NULL,
-		    rnd REAL    
-               );
-	'. 
-	con terminate.
-	^ out ! !
-
-!APostgres methodsFor: 'tests' stamp: 'NM 10/17/2021 18:15:01'!
-test2CheckTableTest1Exists
-	|con arg out| 
-	". a basic table with a few typical data column types "
-	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
-						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
-	con connectionArgs: arg.
-	con startup .
-	out _ con listRelations .
-	con terminate.
-	^ out 
-					
-! !
-
-!APostgres class methodsFor: 'documentation' stamp: 'NM 10/17/2021 01:27:26'!
+!APostgres class methodsFor: 'documentation' stamp: 'NM 10/30/2021 21:38:31'!
 README
 	"
 . To start using this package see the information on the gitHub Web page
  or the examples i put in this class, ot the test cases.	
 
-. TODO. we should be able to do `con terminate` but it does not work.
-On the other side, it seems not harful since running `$> lsof -i 4` in Linux
-and a few times 
-APostgres n1FirstSelect
-APostgres n.2ListDatabases
-..
+. NOTE
 You can see the socket list growing in `$> lsof -i 4` but once you do `Smalltalk garbageCollect .`
 they all do disappear.  
 
 
 	"! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 11:48:47'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:51:53'!
 n1FirstSelect
 	". First Select example 
 	. Need to have a proper proper Postgres setup, Dabatabase and table. 
@@ -1263,7 +1223,8 @@ n1FirstSelect
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 							password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 						 
+	                                       password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'. 
@@ -1272,13 +1233,13 @@ n1FirstSelect
 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 11:58:40'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:52:03'!
 n2ListDatabases
 	". Get a list of available databases, equivalent to: psql> \d  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 		password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con listDatabases . 
@@ -1286,13 +1247,13 @@ n2ListDatabases
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:02:11'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:52:13'!
 n3ListDatabasesPlus
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 		password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con listDatabasesPlus . 
@@ -1300,13 +1261,13 @@ n3ListDatabasesPlus
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:01:43'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:52:23'!
 n3ListDatabasesPlusBROKEN
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 		password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con listDatabasesPlus . 
@@ -1314,13 +1275,13 @@ n3ListDatabasesPlusBROKEN
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:31:00'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:52:33'!
 n4ListRelations
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 		password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con listRelations .
@@ -1328,13 +1289,13 @@ n4ListRelations
 	^ out 
 ! !
 
-!APostgres class methodsFor: 'interactions' stamp: 'NM 10/17/2021 12:31:12'!
+!APostgres class methodsFor: 'interactions' stamp: 'NM 10/30/2021 21:52:43'!
 n5ListRelationsPlus
 	". Get a list of available databases, equivalent to: psql> \d+  " 
 	|con arg out| 
 	
 	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'p' 		password: 'nicola'.  
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare' userName: 'foo' 		password: 'bar'.  
 	con connectionArgs: arg.
 	con startup .
 	out _ con listRelationsPlus .
