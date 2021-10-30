@@ -1,10 +1,9 @@
 # Cuis-Smalltalk-PostgreSQL
 * *Cuis* interface to *PosgreSQL*
-* Port to Cuis of an old *Squeak* software. Original author: *Yanni Chiu*. Original files & info [here](http://map.squeak.org/package/a8d3ca99-f5f4-45e0-9aa7-100a77b64f45). Version used for the port *3.1* which was last updated on 01-Feb-2006.
+* Port of an oldish *Squeak* software to Cuis. Original author: *Yanni Chiu*. Original files & info [here](http://map.squeak.org/package/a8d3ca99-f5f4-45e0-9aa7-100a77b64f45). Version used for starting the port is *3.1*, which was last updated on 01-Feb-2006.
 * **status**. At 30-Oct-2021 all the **21 original tests** provided in 2006 are **green**. CAVEAT. I tweaked a few tests, see the developer notes at the end.  
-* There is [another package](https://github.com/Phantasus/Cuis-Smalltalk-Postgres) for DB connection from Cuis which is comes from a *Pharo* release and
-has a more general scope than this one, for example it can connect to SQlite. I have not tried it
-but we may join efforts in the future. 
+* There is [another package](https://github.com/Phantasus/Cuis-Smalltalk-Postgres) for DB connection from Cuis which comes from a *Pharo* release and
+has a more general scope than this one, for example it can connect to SQlite. I have not tried it yet.
 
 ## Minimal interaction example 
 
@@ -20,7 +19,7 @@ con startup .
 out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'.  
 con terminate.
 
-". see what is in out output variable "
+". see what is in the output variable "
 out class.    "=> PGResult "
 
 ". get columns info, observe here you see colun name and Postgres datatype "
@@ -57,8 +56,8 @@ Transcript show: (ws contents).
 
 
 ## Security warning
-* The machines I use are mostly my office LAN so I don't need to worry too much about unwanted logins.
-That in general this will not be the case. A quick fix for this is to make Postgres port 5432 available only to localhost and 
+* The machines I use are mostly in my office LAN so I don't need to worry too much about unwanted logins.
+This in general will not be the case. A quick fix is to make Postgres port 5432 available only to localhost and 
 then to reach your database via an ssh tunnel. This gives you encription and offloads the authentication problem
 to your server ssh, which is very strong on this. 
 
@@ -67,7 +66,7 @@ to your server ssh, which is very strong on this.
 
   
 ## How to run the tests 
-* It is supposed you have a Postgres database on one of your computer where you can test.
+* It is supposed you have a Postgres database in one of your computers where you can test.
 * In my case it is the computer called **db1**, there **Postgres-13** runs in a **Linux/Debian-11**.
 
 * log into **db1**, make a database **test1**, let it be accessible by the user **foo** who has password **foopass**.
@@ -81,8 +80,8 @@ psql> CREATE USER foo WITH PASSWORD 'foopass';
 psql> GRANT ALL PRIVILEGES ON DATABASE test1 to foo;
 psql> \q
 ```
-* Then you need to make database *foo* accessible from the network, add these lines at the end of file */etc/postgresql/XX/main/pg_hba.conf*. 
-They say whoever on the network can reach this database authentication with password, hashed via *md5*. 
+* Then you need to make the database *foo* accessible from the network, add these lines at the end of file */etc/postgresql/XX/main/pg_hba.conf*. 
+They say whoever on the network can reach this database authenticating with password, hashed via *md5*. 
 ```
 host "test1" foo 0.0.0.0/0 md5
 host "test1" foo ::/0          md5
