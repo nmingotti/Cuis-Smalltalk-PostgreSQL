@@ -25,7 +25,9 @@ out class.    "=> PGResult "
 
 ". get columns info, observe here you see colun name and Postgres datatype "
 out rowDescription columnDescriptions . "=> an OrderedCollection(
-PGColumnDescription(fieldName='istante',typeOid=1114,typeSize=8,typeModifier=4294967295) PGColumnDescription(fieldName='produzione',typeOid=23,typeSize=4,typeModifier=4294967295) PGColumnDescription(fieldName='consumo',typeOid=23,typeSize=4,typeModifier=4294967295)) "
+PGColumnDescription(fieldName='istante',typeOid=1114,typeSize=8,typeModifier=4294967295)
+PGColumnDescription(fieldName='produzione',typeOid=23,typeSize=4,typeModifier=4294967295)
+PGColumnDescription(fieldName='consumo',typeOid=23,typeSize=4,typeModifier=4294967295)) "
 
 ". see the first row, unparsed, all fields are String "
 out rows first .       "=> PGAsciiRow('2017-08-07 23:05:00','279','1350',) "
