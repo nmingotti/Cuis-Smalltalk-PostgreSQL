@@ -53,7 +53,7 @@ Transcript show: (ws contents).
 ```
 
 
-<img src="https://github.com/nmingotti/Cuis-Smalltalk-PostgreSQL/blob/main/images/db-output-printed-1.png" width=40%>
+<img src="https://github.com/nmingotti/Cuis-Smalltalk-PostgreSQL/blob/main/images/db-output-printed-1.png" width=50%>
 
 
 ## Security warning
