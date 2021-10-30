@@ -53,7 +53,7 @@ Transcript show: (ws contents).
 ```
 
 ## Security warning
-* The machines is used are mostly my office LAN so I don't need to worry too much about unwanted logins.
+* The machines I use are mostly my office LAN so I don't need to worry too much about unwanted logins.
 That in general this will not be the case. A quick fix for this is to make Postgres port 5432 available only to localhost and 
 then to reach your database via an ssh tunnel. This gives you encription and offloads the authentication problem
 to your server ssh, which is very strong on this. 
