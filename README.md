@@ -63,6 +63,8 @@ to your server ssh, which is very strong on this.
 
 ## Todo
 * Write a GUI for interactions
+* It would be nice to have some default readable text output in Transcript. Problem: the default font in Transcript is
+  not monospace. It does not seem wise to change that.
 
   
 ## How to run the tests 
