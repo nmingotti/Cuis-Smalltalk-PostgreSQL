@@ -64,8 +64,7 @@ to your server ssh, which is very strong on this.
 
 ## Todo
 * Write a GUI for interactions
-* Add location of relevant Postgres documentation
-* Add picture of the output of the minimal example
+
   
 ## How to run the tests 
 * It is supposed you have a Postgres database on one of your computer where you can test.
@@ -107,7 +106,7 @@ con connectionArgs: arg.
 ```
 
 ## Developer notes 
-* **TODO**. The location where to find relevant Postgres information to modify this package is XXXXX. 
+* **official documentation** relevant for this package, see: [PostgreSQL Documentation, Chapter 7. Internals](https://www.postgresql.org/docs/13/internals.html) 
 * I kept all the tests coming from the 2006 release of this package but I had to make a few changes.
 * I added a few oid for data types: Real, Double, Numeric in `PGConnection(class)>>buildDefaultFieldConverters`. I used
   the oid I could read coming from Postgres in the rawdata.
