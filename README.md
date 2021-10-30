@@ -1,6 +1,6 @@
 # Cuis-Smalltalk-PostgreSQL
-* Cuis interface to PosgresSQL
-* Port to Cuis of an old Squeak software. Original author: XXX. Original files location XXX.
+* *Cuis* interface to *PosgresSQL*
+* Port to Cuis of an old *Squeak* software. Original author: *Yanni Chiu*. Original files & info [here](http://map.squeak.org/package/a8d3ca99-f5f4-45e0-9aa7-100a77b64f45). Version used for the port *3.1* which was last updated on 01-Feb-2006.
 * There is [another package](https://github.com/Phantasus/Cuis-Smalltalk-Postgres) for DB connection from Cuis which is comes from a *Pharo* release and
 has a more general scope than this one, for example it can connect to SQlite. I have not tried it
 but we may join efforts in the future. 
