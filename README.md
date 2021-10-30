@@ -12,12 +12,19 @@ but we may join efforts in the future.
 
 ```
 
+## Security warning
+* The machines is used are mostly my office LAN so I don't need to worry too much about unwanted logins.
+That in general this will not be the case. A quick fix for this is to make Postgres port 5432 available only to localhost and 
+then to reach your database via an ssh tunnel. This gives you encription and offloads the authentication problem
+to your server ssh, which is very strong on this. 
+
+## Todo
+* Write a GUI for interactions
+  
 ## How to run the tests 
 * It is supposed you have a Postgres database on one of your computer where you can test.
 * In my case it is the computer called **db1**, there **Postgres-13** runs in a **Linux/Debian-11**.
-* **SECURITY NOTE**. The machine **db1** is in my office LAN so I don't need to worry too much about unwanted logins.
-That in general will not be the case. A quick fix for this is to make port 5432 available only to localhost and 
-then to reach your database via an ssh tunnel. 
+
 * log into **db1**, make a database **test1**, let it be accessible by the user **foo** who has password **foopass**.
 ```bash
 $> ssh p@db1
