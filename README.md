@@ -90,7 +90,15 @@ $> sudo systemctl restart postgresql.service
 ```
 $> psql -h db1.borghi.lan -U foo -d test1
 ```
-* Now you need to modify `TestPGConnectio>>newConnection` in the *private* category and put your server data and run the tests as usual.
+* Now you need to modify `TestPGConnectio>>newConnection` in the *private* category, put your server data and after that run the tests as usual.
+  In my computer I have this:
+```smalltalk
+con _ PGConnection new.
+arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
+      databaseName: 'test1' userName: 'foo' 	password: 'foopass'.  
+con connectionArgs: arg.
+^ con 
+```
 
 ## Developer notes 
 * I kept all the tests coming from the 2006 release of this package but I had to make a few changes.
