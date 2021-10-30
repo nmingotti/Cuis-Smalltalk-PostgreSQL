@@ -52,6 +52,10 @@ ws close.
 Transcript show: (ws contents). 
 ```
 
+
+<img src="https://github.com/nmingotti/Cuis-Smalltalk-PostgreSQL/blob/main/images/db-output-printed-1.png" width=40%>
+
+
 ## Security warning
 * The machines I use are mostly my office LAN so I don't need to worry too much about unwanted logins.
 That in general this will not be the case. A quick fix for this is to make Postgres port 5432 available only to localhost and 
