@@ -1,340 +1,340 @@
-'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 4:53:05 pm'!
+'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 6:10:20 pm'!
 'Description '!
-!provides: 'Postgres' 1 17!
+!provides: 'Postgres' 1 18!
 !requires: 'Cuis-Base' 50 4928 nil!
 !requires: 'WebClient' 1 22 nil!
 !requires: 'SqueakCompatibility' 1 31 nil!
-SystemOrganization addCategory: #Postgres!
+SystemOrganization addCategory: 'Postgres'!
 
 
-!classDefinition: #PGUnsupportedAuthentication category: #Postgres!
+!classDefinition: #PGUnsupportedAuthentication category: 'Postgres'!
 Error subclass: #PGUnsupportedAuthentication
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'PGUnsupportedAuthentication class' category: #Postgres!
+!classDefinition: 'PGUnsupportedAuthentication class' category: 'Postgres'!
 PGUnsupportedAuthentication class
 	instanceVariableNames: ''!
 
-!classDefinition: #APostgres category: #Postgres!
-Object subclass: #APostgres
-	instanceVariableNames: 'password'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'APostgres class' category: #Postgres!
-APostgres class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGActiveObject category: #Postgres!
-Object subclass: #PGActiveObject
-	instanceVariableNames: 'trace state events'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGActiveObject class' category: #Postgres!
-PGActiveObject class
-	instanceVariableNames: 'stateTransitionTable'!
-
-!classDefinition: #PGConnection category: #Postgres!
-PGActiveObject subclass: #PGConnection
-	instanceVariableNames: 'socket readBuffer readIndex lastReadIndex writeBuffer processId secretKey sql functionCallOid functionCallArgs copyStream result connectionArgs notificationSubscribers fieldConverters'
-	classVariableNames: 'DefaultConnectionArgs DefaultTraceLevel'
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGConnection class' category: #Postgres!
-PGConnection class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGNotificationSubscriber category: #Postgres!
-PGActiveObject subclass: #PGNotificationSubscriber
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGNotificationSubscriber class' category: #Postgres!
-PGNotificationSubscriber class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGConnectionArgs category: #Postgres!
-Object subclass: #PGConnectionArgs
-	instanceVariableNames: 'hostname portno databaseName userName password extraArgs debugTty'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGConnectionArgs class' category: #Postgres!
-PGConnectionArgs class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGPacket category: #Postgres!
-Object subclass: #PGPacket
-	instanceVariableNames: ''
-	classVariableNames: 'PacketClasses'
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGPacket class' category: #Postgres!
-PGPacket class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGAbstractStringResponse category: #Postgres!
-PGPacket subclass: #PGAbstractStringResponse
-	instanceVariableNames: 'value'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGAbstractStringResponse class' category: #Postgres!
-PGAbstractStringResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGCompletedResponse category: #Postgres!
-PGAbstractStringResponse subclass: #PGCompletedResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGCompletedResponse class' category: #Postgres!
-PGCompletedResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGCursorResponse category: #Postgres!
-PGAbstractStringResponse subclass: #PGCursorResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGCursorResponse class' category: #Postgres!
-PGCursorResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGEmptyQueryResponse category: #Postgres!
-PGAbstractStringResponse subclass: #PGEmptyQueryResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGEmptyQueryResponse class' category: #Postgres!
-PGEmptyQueryResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGErrorResponse category: #Postgres!
-PGAbstractStringResponse subclass: #PGErrorResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGErrorResponse class' category: #Postgres!
-PGErrorResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGNoticeResponse category: #Postgres!
-PGAbstractStringResponse subclass: #PGNoticeResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGNoticeResponse class' category: #Postgres!
-PGNoticeResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGAsciiRow category: #Postgres!
-PGPacket subclass: #PGAsciiRow
-	instanceVariableNames: 'description nullFields rawData'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGAsciiRow class' category: #Postgres!
-PGAsciiRow class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGBinaryRow category: #Postgres!
-PGAsciiRow subclass: #PGBinaryRow
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGBinaryRow class' category: #Postgres!
-PGBinaryRow class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGAuthentication category: #Postgres!
-PGPacket subclass: #PGAuthentication
-	instanceVariableNames: 'type salt'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGAuthentication class' category: #Postgres!
-PGAuthentication class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGBackendKeyData category: #Postgres!
-PGPacket subclass: #PGBackendKeyData
-	instanceVariableNames: 'processId secretKey'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGBackendKeyData class' category: #Postgres!
-PGBackendKeyData class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGCancelRequest category: #Postgres!
-PGPacket subclass: #PGCancelRequest
-	instanceVariableNames: 'processId secretKey'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGCancelRequest class' category: #Postgres!
-PGCancelRequest class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGColumnDescription category: #Postgres!
-PGPacket subclass: #PGColumnDescription
-	instanceVariableNames: 'fieldName typeOid typeSize typeModifier'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGColumnDescription class' category: #Postgres!
-PGColumnDescription class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGCopyInResponse category: #Postgres!
-PGPacket subclass: #PGCopyInResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGCopyInResponse class' category: #Postgres!
-PGCopyInResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGCopyOutResponse category: #Postgres!
-PGPacket subclass: #PGCopyOutResponse
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGCopyOutResponse class' category: #Postgres!
-PGCopyOutResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGFunctionCall category: #Postgres!
-PGPacket subclass: #PGFunctionCall
-	instanceVariableNames: 'oid arguments'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGFunctionCall class' category: #Postgres!
-PGFunctionCall class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGFunctionResultResponse category: #Postgres!
-PGPacket subclass: #PGFunctionResultResponse
-	instanceVariableNames: 'result'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGFunctionResultResponse class' category: #Postgres!
-PGFunctionResultResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGNotificationResponse category: #Postgres!
-PGPacket subclass: #PGNotificationResponse
-	instanceVariableNames: 'processId conditionName'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGNotificationResponse class' category: #Postgres!
-PGNotificationResponse class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGPasswordPacket category: #Postgres!
-PGPacket subclass: #PGPasswordPacket
-	instanceVariableNames: 'password'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGPasswordPacket class' category: #Postgres!
-PGPasswordPacket class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGQuery category: #Postgres!
-PGPacket subclass: #PGQuery
-	instanceVariableNames: 'queryString'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGQuery class' category: #Postgres!
-PGQuery class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGReadyForQuery category: #Postgres!
-PGPacket subclass: #PGReadyForQuery
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGReadyForQuery class' category: #Postgres!
-PGReadyForQuery class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGRowDescription category: #Postgres!
-PGPacket subclass: #PGRowDescription
-	instanceVariableNames: 'resultSet numberOfColumns columnDescriptions'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGRowDescription class' category: #Postgres!
-PGRowDescription class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGStartupPacket category: #Postgres!
-PGPacket subclass: #PGStartupPacket
-	instanceVariableNames: 'version databaseName userName extraArgs debugTty'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGStartupPacket class' category: #Postgres!
-PGStartupPacket class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGTerminate category: #Postgres!
-PGPacket subclass: #PGTerminate
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGTerminate class' category: #Postgres!
-PGTerminate class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGResult category: #Postgres!
-Object subclass: #PGResult
-	instanceVariableNames: 'connection resultSets errorResponse functionResult'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGResult class' category: #Postgres!
-PGResult class
-	instanceVariableNames: ''!
-
-!classDefinition: #PGResultSet category: #Postgres!
-Object subclass: #PGResultSet
-	instanceVariableNames: 'result completedResponse rowDescription rows'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Postgres'!
-!classDefinition: 'PGResultSet class' category: #Postgres!
-PGResultSet class
-	instanceVariableNames: ''!
-
-!classDefinition: #TestPGConnection category: #Postgres!
+!classDefinition: #TestPGConnection category: 'Postgres'!
 TestCase subclass: #TestPGConnection
 	instanceVariableNames: 'useConnectionDefaults notificationSubscriberCount'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Postgres'!
-!classDefinition: 'TestPGConnection class' category: #Postgres!
+!classDefinition: 'TestPGConnection class' category: 'Postgres'!
 TestPGConnection class
+	instanceVariableNames: ''!
+
+!classDefinition: #APostgres category: 'Postgres'!
+Object subclass: #APostgres
+	instanceVariableNames: 'password'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'APostgres class' category: 'Postgres'!
+APostgres class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGActiveObject category: 'Postgres'!
+Object subclass: #PGActiveObject
+	instanceVariableNames: 'trace state events'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGActiveObject class' category: 'Postgres'!
+PGActiveObject class
+	instanceVariableNames: 'stateTransitionTable'!
+
+!classDefinition: #PGConnection category: 'Postgres'!
+PGActiveObject subclass: #PGConnection
+	instanceVariableNames: 'socket readBuffer readIndex lastReadIndex writeBuffer processId secretKey sql functionCallOid functionCallArgs copyStream result connectionArgs notificationSubscribers fieldConverters'
+	classVariableNames: 'DefaultConnectionArgs DefaultTraceLevel'
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGConnection class' category: 'Postgres'!
+PGConnection class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGNotificationSubscriber category: 'Postgres'!
+PGActiveObject subclass: #PGNotificationSubscriber
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGNotificationSubscriber class' category: 'Postgres'!
+PGNotificationSubscriber class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGConnectionArgs category: 'Postgres'!
+Object subclass: #PGConnectionArgs
+	instanceVariableNames: 'hostname portno databaseName userName password extraArgs debugTty'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGConnectionArgs class' category: 'Postgres'!
+PGConnectionArgs class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGPacket category: 'Postgres'!
+Object subclass: #PGPacket
+	instanceVariableNames: ''
+	classVariableNames: 'PacketClasses'
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGPacket class' category: 'Postgres'!
+PGPacket class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGAbstractStringResponse category: 'Postgres'!
+PGPacket subclass: #PGAbstractStringResponse
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGAbstractStringResponse class' category: 'Postgres'!
+PGAbstractStringResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGCompletedResponse category: 'Postgres'!
+PGAbstractStringResponse subclass: #PGCompletedResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGCompletedResponse class' category: 'Postgres'!
+PGCompletedResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGCursorResponse category: 'Postgres'!
+PGAbstractStringResponse subclass: #PGCursorResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGCursorResponse class' category: 'Postgres'!
+PGCursorResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGEmptyQueryResponse category: 'Postgres'!
+PGAbstractStringResponse subclass: #PGEmptyQueryResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGEmptyQueryResponse class' category: 'Postgres'!
+PGEmptyQueryResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGErrorResponse category: 'Postgres'!
+PGAbstractStringResponse subclass: #PGErrorResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGErrorResponse class' category: 'Postgres'!
+PGErrorResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGNoticeResponse category: 'Postgres'!
+PGAbstractStringResponse subclass: #PGNoticeResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGNoticeResponse class' category: 'Postgres'!
+PGNoticeResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGAsciiRow category: 'Postgres'!
+PGPacket subclass: #PGAsciiRow
+	instanceVariableNames: 'description nullFields rawData'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGAsciiRow class' category: 'Postgres'!
+PGAsciiRow class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGBinaryRow category: 'Postgres'!
+PGAsciiRow subclass: #PGBinaryRow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGBinaryRow class' category: 'Postgres'!
+PGBinaryRow class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGAuthentication category: 'Postgres'!
+PGPacket subclass: #PGAuthentication
+	instanceVariableNames: 'type salt'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGAuthentication class' category: 'Postgres'!
+PGAuthentication class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGBackendKeyData category: 'Postgres'!
+PGPacket subclass: #PGBackendKeyData
+	instanceVariableNames: 'processId secretKey'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGBackendKeyData class' category: 'Postgres'!
+PGBackendKeyData class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGCancelRequest category: 'Postgres'!
+PGPacket subclass: #PGCancelRequest
+	instanceVariableNames: 'processId secretKey'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGCancelRequest class' category: 'Postgres'!
+PGCancelRequest class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGColumnDescription category: 'Postgres'!
+PGPacket subclass: #PGColumnDescription
+	instanceVariableNames: 'fieldName typeOid typeSize typeModifier'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGColumnDescription class' category: 'Postgres'!
+PGColumnDescription class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGCopyInResponse category: 'Postgres'!
+PGPacket subclass: #PGCopyInResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGCopyInResponse class' category: 'Postgres'!
+PGCopyInResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGCopyOutResponse category: 'Postgres'!
+PGPacket subclass: #PGCopyOutResponse
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGCopyOutResponse class' category: 'Postgres'!
+PGCopyOutResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGFunctionCall category: 'Postgres'!
+PGPacket subclass: #PGFunctionCall
+	instanceVariableNames: 'oid arguments'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGFunctionCall class' category: 'Postgres'!
+PGFunctionCall class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGFunctionResultResponse category: 'Postgres'!
+PGPacket subclass: #PGFunctionResultResponse
+	instanceVariableNames: 'result'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGFunctionResultResponse class' category: 'Postgres'!
+PGFunctionResultResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGNotificationResponse category: 'Postgres'!
+PGPacket subclass: #PGNotificationResponse
+	instanceVariableNames: 'processId conditionName'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGNotificationResponse class' category: 'Postgres'!
+PGNotificationResponse class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGPasswordPacket category: 'Postgres'!
+PGPacket subclass: #PGPasswordPacket
+	instanceVariableNames: 'password'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGPasswordPacket class' category: 'Postgres'!
+PGPasswordPacket class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGQuery category: 'Postgres'!
+PGPacket subclass: #PGQuery
+	instanceVariableNames: 'queryString'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGQuery class' category: 'Postgres'!
+PGQuery class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGReadyForQuery category: 'Postgres'!
+PGPacket subclass: #PGReadyForQuery
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGReadyForQuery class' category: 'Postgres'!
+PGReadyForQuery class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGRowDescription category: 'Postgres'!
+PGPacket subclass: #PGRowDescription
+	instanceVariableNames: 'resultSet numberOfColumns columnDescriptions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGRowDescription class' category: 'Postgres'!
+PGRowDescription class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGStartupPacket category: 'Postgres'!
+PGPacket subclass: #PGStartupPacket
+	instanceVariableNames: 'version databaseName userName extraArgs debugTty'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGStartupPacket class' category: 'Postgres'!
+PGStartupPacket class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGTerminate category: 'Postgres'!
+PGPacket subclass: #PGTerminate
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGTerminate class' category: 'Postgres'!
+PGTerminate class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGResult category: 'Postgres'!
+Object subclass: #PGResult
+	instanceVariableNames: 'connection resultSets errorResponse functionResult'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGResult class' category: 'Postgres'!
+PGResult class
+	instanceVariableNames: ''!
+
+!classDefinition: #PGResultSet category: 'Postgres'!
+Object subclass: #PGResultSet
+	instanceVariableNames: 'result completedResponse rowDescription rows'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Postgres'!
+!classDefinition: 'PGResultSet class' category: 'Postgres'!
+PGResultSet class
 	instanceVariableNames: ''!
 
 
@@ -472,6 +472,734 @@ printOn: aStream
 		nextPutAll: ',debugTty='; nextPutAll: debugTty printString;
 		nextPutAll: ',version='; nextPutAll: version printString;
 		nextPutAll: ')'
+! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 11/10/2004 23:32'!
+asFloat8Arg: aFloat
+	"Convert aFloat to a ByteArray for use as a function call argument."
+
+	| word1 word2 bigEndian arg tmp |
+
+	word1 := aFloat basicAt: 1.
+	word2 := aFloat basicAt: 2.
+	bigEndian := false.
+	bigEndian ifTrue: [
+			tmp := word1.
+			word1 := word2.
+			word2 := tmp.
+		].
+	arg := ByteArray new: 8.
+	arg at: 1 put: ((word1 bitShift: -24) bitAnd: 16rFF).
+	arg at: 2 put: ((word1 bitShift: -16) bitAnd: 16rFF).
+	arg at: 3 put: ((word1 bitShift: -8) bitAnd: 16rFF).
+	arg at: 4 put: ((word1 bitShift: 0) bitAnd: 16rFF).
+	arg at: 5 put: ((word2 bitShift: -24) bitAnd: 16rFF).
+	arg at: 6 put: ((word2 bitShift: -16) bitAnd: 16rFF).
+	arg at: 7 put: ((word2 bitShift: -8) bitAnd: 16rFF).
+	arg at: 8 put: ((word2 bitShift: 0) bitAnd: 16rFF).
+	^ arg
+! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 2/9/2005 21:51'!
+asFloat8ArgVW: aFloat
+	"Convert aFloat to a ByteArray for use as a function call argument."
+
+	| arg |
+	arg := ByteArray new: 8.
+	1 to: 8 do: [:i | arg at: i put: (aFloat basicAt: 8 - i + 1)].
+	^arg! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+copy: sql withStream: aStream
+
+	| conn |
+	conn := self newConnection.
+	conn startup.
+	conn copy: sql withStream: aStream.
+	conn terminate.! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+execute: sql on: conn
+
+	| result resultStream |
+
+	resultStream := ReadWriteStream on: String new.
+	result := conn execute: sql.
+	result displayResultOn: resultStream.
+	^ resultStream contents.
+! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:04:01'!
+executeAll: queries
+
+	self executeAll: queries withDelayForMilliseconds: 1000! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+executeAll: queries withDelayForMilliseconds: millisecondDelay
+
+	| conn result |
+
+	conn := self newConnection.
+	conn startup.
+	queries do: [:each |
+		Transcript nextPutAll: 'QUERY: '; nextPutAll: each; cr; flush.
+		result := conn execute: each.
+		result displayResultOn: Transcript.
+		Transcript flush.
+		millisecondDelay isNil ifFalse: [
+			Transcript nextPutAll: 'Delaying for ', millisecondDelay printString, ' ms...'; cr.
+			(Delay forMilliseconds: millisecondDelay) wait.
+			Transcript flush.
+		].
+	].
+	conn terminate.! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 16:51:10'!
+floatFromByteArray: aByteArray
+	"Convert aByteArray to a Float."
+
+	| word1 word2 aFloat |
+
+ "CAVEAT. [NM] changed on 30-oct-2021 this he is not sure about equivalence "	
+
+"
+	word1 := (aByteArray at: 1) bitShift: 24.
+	word1 := word1 bitOr: ((aByteArray at: 2) bitShift: 16).
+	word1 := word1 bitOr: ((aByteArray at: 3) bitShift: 8).
+	word1 := word1 bitOr: ((aByteArray at: 4) bitShift: 0).
+	word2 := (aByteArray at: 5) bitShift: 24.
+	word2 := word2 bitOr: ((aByteArray at: 6) bitShift: 16).
+	word2 := word2 bitOr: ((aByteArray at: 7) bitShift: 8).
+	word2 := word2 bitOr: ((aByteArray at: 8) bitShift: 0).
+
+	aFloat := 0.0.
+	aFloat basicAt: 1 put: word1.
+	aFloat basicAt: 2 put: word2. 
+	
+	"
+	aFloat  _ aByteArray doubleAt: 1 bigEndian: true.
+	
+	^aFloat! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 2/9/2005 21:59'!
+floatFromByteArrayVW: aByteArray
+	"Convert aByteArray to a Float."
+
+	| aFloat |
+	aFloat := ByteArray new: 8.
+	1 to: 8 do: [:i | aFloat at: 8 - i + 1 put: (aByteArray at: i)].
+	aFloat changeClassTo: Double.
+	^aFloat! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+functionCall: oid arguments: arguments
+
+	| conn result |
+	conn := self newConnection.
+	conn startup.
+	result := conn functionCall: oid arguments: arguments.
+	conn terminate.
+	^ result
+! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:03:18'!
+newConnection
+
+	| con arg |
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
+						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
+	con connectionArgs: arg.
+	^ con 
+	
+	"
+	conn := PGConnection new.
+	(useConnectionDefaults isNil or: [useConnectionDefaults not])
+		ifTrue: [ conn connectionArgs: PGConnection buildDefaultConnectionArgs ]
+		ifFalse: [ PGConnection defaultConnectionArgs: nil. conn connectionArgs: nil ].
+	(notificationSubscriberCount notNil and: [notificationSubscriberCount > 0 ])
+		ifTrue: [
+			1 to: notificationSubscriberCount do: [:i |
+				conn addNotificationSubscriber: PGNotificationSubscriber new]
+		].
+	^ conn
+	"! !
+
+!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+tearDown
+
+	PGConnection defaultConnectionArgs: nil.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+createTestCopyInOutTable
+
+	self executeAll: #(
+			'CREATE TABLE TestCopyInOutTable (
+				id integer,
+				name text
+			)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:17:07'!
+createTestFieldConverterTable
+
+	self executeAll: #(
+'CREATE TABLE TestFieldConverterTable (
+aBool1 boolean,
+aBool2 boolean,
+aChar char,
+aChar1 char(1),
+aChar2 char(2),
+anInt2 smallint,
+anInt4 integer,
+anInt8 bigint,
+aFloat4 real,
+aFloat8 double precision,
+aNumeric numeric,
+aDate date,
+aTime time,
+aText text
+)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+createTestTable
+
+	self executeAll: #(
+			'CREATE TABLE products (
+				product_no integer,
+				name text,
+				price numeric
+			)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+dropTestCopyInOutTable
+
+	self executeAll: #(
+			'DROP TABLE TestCopyInOutTable'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+dropTestFieldConverterTable
+
+	self executeAll: #(
+			'DROP TABLE TestFieldConverterTable'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+dropTestTable
+
+	self executeAll: #(
+			'DROP TABLE products'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+makeCopyInOutEos
+	"Answer the COPY IN/OUT end of stream code."
+
+	^ String with: $\ with: $.with: Character lf
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+makeCopyInOutLine: aCollection
+
+	| ws |
+	ws := WriteStream on: (String new: 512).
+	aCollection withIndexDo: [:each :i |
+		ws nextPutAll: each.
+		i < aCollection size ifTrue: [ws tab]
+	].
+	ws nextPut: Character lf.
+	^ ws contents.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+oidAbs
+	"oid 1395 is abs(float8)"
+	^ 1395
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+oidSqrt
+	"oid 1344 is sqrt(float8)"
+	^ 1344
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+oidTimenow
+
+	^ 250
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCancelRequest
+	"Test: CancelRequest.
+
+	Set the debug level of the postmaster daemon to 1 or greater.
+	Capture the postmaster output in a log file.
+	Examine the log file for a cancel request with a matching process id.
+
+	Example, an init.d script containing:
+		su -l postgres -s /bin/sh -c ""/usr/bin/pg_ctl  -D $PGDATA -p /usr/bin/postmaster -o '-i -d 1' start  > /var/log/postgresql/log 2>&1"" < /dev/null
+	yields a line in the log:
+		/usr/bin/postmaster: processCancelRequest: sending SIGINT to process 13142
+	"
+
+	| conn |
+
+	conn := self newConnection.
+	conn startup.
+	conn cancelRequest.
+	conn terminate.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testConnection
+	"Test: connect and disconnect, without any queries."
+
+	self executeAll: #().
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCopyIn1
+
+	| ws conn result |
+	ws := WriteStream on: String new.
+	ws nextPutAll: self makeCopyInOutEos.
+
+	self dropTestCopyInOutTable.
+	self createTestCopyInOutTable.
+
+	conn := self newConnection.
+	conn startup.
+	conn copy: 'copy TestCopyInOutTable from stdin' withStream: ws.
+	result := conn execute: 'select * from TestCopyInOutTable'.
+	conn terminate.
+
+	self assert: result rows size = 0.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCopyIn2
+
+	| ws result conn |
+
+	self dropTestCopyInOutTable.
+	self createTestCopyInOutTable.
+
+	ws := WriteStream on: String new.
+	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
+	ws nextPutAll: self makeCopyInOutEos.
+
+	conn := self newConnection.
+	conn startup.
+	conn copy: 'copy TestCopyInOutTable from stdin' withStream: ws.
+	result := conn execute: 'select * from TestCopyInOutTable'.
+	conn terminate.
+	self assert: result rows size = 1.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCopyOut1
+
+	| ws |
+	self dropTestCopyInOutTable.
+	self createTestCopyInOutTable.
+	ws := WriteStream on: (String new: 512).
+	self copy: 'copy TestCopyInOutTable to stdout' withStream: ws.
+	"Transcript show: ws contents printString; cr."
+	self assert: ws contents = (String with: $\ with: $. with: Character lf).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCopyOut2
+
+	| ws rs |
+
+	ws := WriteStream on: String new.
+	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
+	ws nextPutAll: self makeCopyInOutEos.
+
+	self dropTestCopyInOutTable.
+	self createTestCopyInOutTable.
+	self executeAll: #('insert into TestCopyInOutTable values(77,''abcde'')').
+
+	rs := WriteStream on: (String new: 512).
+	self copy: 'copy TestCopyInOutTable to stdout' withStream: rs.
+
+	self assert: rs contents = ws contents.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testCopyOut3
+
+	| ws rs |
+
+	ws := WriteStream on: String new.
+	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
+	ws nextPutAll: (self makeCopyInOutLine: (Array with: '88' with: 'vwxyz')).
+	ws nextPutAll: self makeCopyInOutEos.
+
+	self dropTestCopyInOutTable.
+	self createTestCopyInOutTable.
+	self executeAll: #('insert into TestCopyInOutTable values(77,''abcde'')').
+	self executeAll: #('insert into TestCopyInOutTable values(88,''vwxyz'')').
+
+	rs := WriteStream on: (String new: 512).
+	self copy: 'copy TestCopyInOutTable to stdout' withStream: rs.
+
+	self assert: rs contents = ws contents.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testExecute1
+
+	self executeAll: #(
+			'select timenow()'
+			'select abs(-1)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testExecute2
+
+	self executeAll: #(
+			'select timenow(); select abs(-1)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testExecuteUsingConnectionDefaults
+
+	useConnectionDefaults := true.
+	self executeAll: #(
+			'select timenow()'
+			'select abs(-1)'
+		).
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testFieldConverter
+	"Test: two different connections can have a different field converter for a given typeOid.
+
+	This capability would be useful when using one image to connect to two different databases,
+	where the same (custom) typeOid is defined differently in each database.
+	"
+
+	| conn1 result1 conn2 result2 newConverter |
+
+	self dropTestTable.
+	self createTestTable.
+
+	conn1 := self newConnection.
+	conn2 := self newConnection.
+	conn1 startup.
+	conn2 startup.
+
+	result1 := conn1 execute: 'INSERT INTO products VALUES (1);'.
+	result1 := conn1 execute: 'select * from products'.
+
+	newConverter := [:value | value].
+	conn2 fieldConverterAt: 20 put: newConverter.
+	conn2 fieldConverterAt: 21 put: newConverter.
+	conn2 fieldConverterAt: 23 put: newConverter.
+	result2 := conn2 execute: 'select * from products'.
+
+	conn1 terminate.
+	conn2 terminate.
+
+	self assert: result1 rows size = 1.
+	self assert: result1 rows first data first = 1.
+
+	self assert: result2 rows size = 1.
+	self assert: result2 rows first data first = '1'.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:51:05'!
+testFieldConverter2
+
+	| conn result data |
+
+	self dropTestFieldConverterTable.
+	self createTestFieldConverterTable.
+
+	conn := self newConnection.
+	conn startup.
+	result := conn execute:
+'INSERT INTO TestFieldConverterTable VALUES (TRUE,FALSE,''A'',''B'',''CD'',77,88,99,11.11,22.22,33.33,''2001-01-01'',''04:05:06'',''abcd'');'.
+	result := conn execute: 'select * from TestFieldConverterTable'.
+	conn terminate.
+
+	self assert: result rows size = 1.
+	data := result rows first data.
+	"result rows first inspect."
+	self assert: (data at: 1).
+	self assert: (data at: 2) not.
+	self assert: (data at: 3) = 'A'.
+	self assert: (data at: 4) = 'B'.
+	self assert: (data at: 5) = 'CD'.
+	self assert: (data at: 6) = 77.
+	self assert: (data at: 7) = 88.
+	self assert: (data at: 8) = 99.
+	self assert: ((data at: 9) - 11.11) abs < 0.0001.
+	self assert: ((data at: 10) - 22.22) abs < 0.0001.
+	self assert: ((data at: 11) - 33.33) abs < 0.0001.
+	"self assert: (data at: 12) = (DateAndTime year: 2001 month: 1 day: 1 hour: 0 minute: 0 second: 0)."
+	self assert: (data at: 12) = (Date newDay: 1 month: 1 year: 2001).
+	self assert: (data at: 13) = (Time fromSeconds: (4*60*60) + (5*60) + 6).
+	self assert: (data at: 14) = 'abcd'.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 2/1/2006 11:37'!
+testFieldConverter3
+
+	| conn result d |
+
+	self dropTestFieldConverterTable.
+	self createTestFieldConverterTable.
+
+	conn := self newConnection.
+	conn startup.
+	result := conn execute:
+'INSERT INTO TestFieldConverterTable VALUES (TRUE,FALSE,''A'',''B'',''CD'',77,88,99,11.11,22.22,33.33,''2001-01-01'',''04:05:06'',''abcd'');'.
+	result := conn execute: 'select * from TestFieldConverterTable'.
+	conn terminate.
+
+	self assert: result rows size = 1.
+	d := result rows first dataKeyedByFieldName.
+	"result rows first inspect."
+	self assert: (d at: 'aBool1' asLowercase).
+	self assert: (d at: 'aBool2' asLowercase) not.
+	self assert: (d at: 'aChar' asLowercase) = 'A'.
+	self assert: (d at: 'aChar1' asLowercase) = 'B'.
+	self assert: (d at: 'aChar2' asLowercase) = 'CD'.
+	self assert: (d at: 'anInt2' asLowercase) = 77.
+	self assert: (d at: 'anInt4' asLowercase) = 88.
+	self assert: (d at: 'anInt8' asLowercase) = 99.
+	self assert: ((d at: 'aFloat4' asLowercase) - 11.11) abs < 0.0001.
+	self assert: ((d at: 'aFloat8' asLowercase) - 22.22) abs < 0.0001.
+	self assert: ((d at: 'aNumeric' asLowercase) - 33.33) abs < 0.0001.
+	"self assert: (d at: 'aDate' asLowercase) = (DateAndTime year: 2001 month: 1 day: 1 hour: 0 minute: 0 second: 0)."
+	self assert: (d at: 'aDate' asLowercase) = (Date newDay: 1 month: 1 year: 2001).
+	self assert: (d at: 'aTime' asLowercase) = (Time fromSeconds: (4*60*60) + (5*60) + 6).
+	self assert: (d at: 'aText' asLowercase) = 'abcd'.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testFunctionCall
+	"Test: make several function calls before terminating."
+
+	| conn result arg |
+	arg := self asFloat8Arg: 1.0.
+	conn := self newConnection.
+	conn startup.
+	result := conn functionCall: self oidTimenow arguments: OrderedCollection new.
+	result := conn functionCall: self oidAbs arguments: (OrderedCollection with: arg).
+	result := conn functionCall: self oidSqrt arguments: (OrderedCollection with: arg).
+	conn terminate.
+	^ result
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testFunctionCall1
+
+	| result |
+	result := self functionCall: self oidTimenow arguments: OrderedCollection new.
+	self assert: result functionResult notNil.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 11/10/2004 23:52'!
+testFunctionCall2
+
+	| arg result |
+	arg := self asFloat8Arg: -1.0.
+	result :=  self functionCall: self oidAbs arguments: (OrderedCollection with: arg).
+	self assert: result functionResult notNil.
+	self assert: (self floatFromByteArray: result functionResult result) = 1.0.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 11/10/2004 23:54'!
+testFunctionCall3
+
+	| arg result |
+	arg := self asFloat8Arg: 1.0.
+	result := self functionCall: self oidSqrt arguments: (OrderedCollection with: arg).
+	self assert: result functionResult notNil.
+	self assert: (self floatFromByteArray: result functionResult result) = 1.0.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testNotify1
+
+	notificationSubscriberCount := 1.
+
+	[
+		self executeAll: #(
+			'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest'
+			'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest'
+		) withDelayForMilliseconds: 1000
+	] fork.
+
+	self executeAll: #(
+		'listen pgtest'
+		'select timenow()'
+		'select timenow()'
+	) withDelayForMilliseconds: 5000
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 18:10:10'!
+testNotify2
+	"Test: a NoticeResponse will be sent because there is an extra field on the input line.
+	[NM] 30-oct-2021. I don't understand the logic intended by the original author of this test. 
+	 This insert is intended to fail. I detect the failure and check the error message, if the error message is what
+	i expect the test is passed. 
+	"
+
+	| ws conn err|
+
+	notificationSubscriberCount := 2.
+
+	self dropTestTable.
+	self createTestTable.
+
+	ws := WriteStream on: String new.
+	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde' with: '123.456' with: '999.999')).
+	ws nextPutAll: self makeCopyInOutEos.
+
+	err _ ''. 
+	[
+		conn := self newConnection.
+		conn startup.
+		conn copy: 'copy products from stdin' withStream: ws.
+		conn terminate ] on: Error do: [ 
+			err _ conn result errorResponse value withBlanksTrimmed.
+		].
+	self assert: (err = 'ERROR:  extra data after last expected column').
+	! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testResultSet1
+
+	| conn result |
+
+	self dropTestTable.
+	self createTestTable.
+
+	conn := self newConnection.
+	conn startup.
+	result := conn execute: 'insert into products values(77,''abcde'',123.456)'.
+	result := conn execute: 'select * from products'.
+	conn terminate.
+
+	self assert: result rows size = 1.
+! !
+
+!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+testResultSet2
+
+	| conn result rs1 rs2 |
+
+	self dropTestTable.
+	self createTestTable.
+
+	conn := self newConnection.
+	conn startup.
+	result := conn execute: 'insert into products values(49,''abcde'',123.456)'.
+	result := conn execute: 'insert into products values(50,''abcde'',123.456)'.
+	result := conn execute: 'insert into products values(51,''abcde'',123.456)'.
+	result := conn execute: 'insert into products values(52,''abcde'',123.456)'.
+	result := conn execute: 'select * from products; select * from products where product_no > 50'.
+	conn terminate.
+
+	rs1 := result resultSets at: 1.
+	self assert: rs1 rows size = 4.
+
+	rs2 := result resultSets at: 2.
+	self assert: rs2 rows size = 2.
+! !
+
+!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
+regress: testName
+
+	| inStream conn outStream line pos result sql |
+
+	Transcript show: testName, '--starting test'; cr.
+	conn := self newConnection.
+	conn startup.
+
+	inStream := FileStream readOnlyFileNamed: 'u:\lib\pgsql\test\regress\sql\', testName, '.sql'.
+	outStream := FileStream newFileNamed: testName, '.out'.
+	sql := ''.
+	[inStream atEnd] whileFalse: [
+		line := inStream upTo: Character lf.
+		(line beginsWith: '--')
+			ifTrue: [outStream nextPutAll: line; cr].
+		(line size > 0 and: [(line beginsWith: '--') not]) ifTrue: [
+			pos := line findString: '\g'. "\g is psql execute command"
+			pos > 0 ifTrue: [line := line copyFrom: 1 to: pos - 1].
+			sql := sql, line, String cr.
+			(line endsWith: ';') ifTrue: [
+				result := conn execute: sql.
+				Transcript show: sql; flush.
+				outStream nextPutAll: sql.
+				result displayResultOn: outStream.
+				sql := ''.
+			].
+		].
+	].
+	inStream close.
+	outStream close.
+
+	conn terminate.
+	Transcript show: testName, '--test completed'; cr.
+! !
+
+!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
+regressionTestNames
+
+	^#(
+		#('boolean' 'char' 'name' 'varchar' 'text' 'int2' 'int4' 'int8' 'oid' 'float4' 'float8' 'numeric')
+		'strings'
+		'numerology'
+		#('point' 'lseg' 'box' 'path' 'polygon' 'circle' 'interval' 'timestamp' 'reltime' 'tinterval' 'inet' 'comments' 'oidjoins' 'type_sanity' 'opr_sanity')
+		'abstime'
+		'geometry'
+		'horology'
+		'create_function_1'
+		'create_type'
+		'create_table'
+		'create_function_2'
+		'copy'
+		#('constraints' 'triggers' 'create_misc' 'create_aggregate' 'create_operator' 'create_index')
+		'create_view'
+		'sanity_check'
+		'errors'
+		'select'
+		#('select_info' 'select_distinct' 'select_distinct_on' 'select_implicit' 'select_having' 'subselect' 'union' 'case' 'join' 'aggregates' 'transactions' 'random' 'portals' 'arrays' 'btree_index' 'hash_index')
+		'misc'
+		#('select_views' 'alter_table' 'portals_p2' 'rules' 'foreign_key')
+		#('limit' 'plpgsql' 'temp')
+	)! !
+
+!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
+runRegressionTests
+	"TestPGConnection new runRegressionTests"
+
+	self regress: 'drop'.
+	(self regressionTestNames at: 1) do: [:each | self regress: each].
+	"self regressionTestNames do: [:test |
+		test isString
+			ifTrue: [self regress: test]
+			ifFalse: [test do: [:each | self regress: each]]
+	]."
 ! !
 
 !APostgres methodsFor: 'tests' stamp: 'NM 10/17/2021 18:20:39'!
@@ -2697,724 +3425,5 @@ on: aResult
 	^ self basicNew initialize
 		result: aResult;
 		yourself.
-! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 11/10/2004 23:32'!
-asFloat8Arg: aFloat
-	"Convert aFloat to a ByteArray for use as a function call argument."
-
-	| word1 word2 bigEndian arg tmp |
-
-	word1 := aFloat basicAt: 1.
-	word2 := aFloat basicAt: 2.
-	bigEndian := false.
-	bigEndian ifTrue: [
-			tmp := word1.
-			word1 := word2.
-			word2 := tmp.
-		].
-	arg := ByteArray new: 8.
-	arg at: 1 put: ((word1 bitShift: -24) bitAnd: 16rFF).
-	arg at: 2 put: ((word1 bitShift: -16) bitAnd: 16rFF).
-	arg at: 3 put: ((word1 bitShift: -8) bitAnd: 16rFF).
-	arg at: 4 put: ((word1 bitShift: 0) bitAnd: 16rFF).
-	arg at: 5 put: ((word2 bitShift: -24) bitAnd: 16rFF).
-	arg at: 6 put: ((word2 bitShift: -16) bitAnd: 16rFF).
-	arg at: 7 put: ((word2 bitShift: -8) bitAnd: 16rFF).
-	arg at: 8 put: ((word2 bitShift: 0) bitAnd: 16rFF).
-	^ arg
-! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 2/9/2005 21:51'!
-asFloat8ArgVW: aFloat
-	"Convert aFloat to a ByteArray for use as a function call argument."
-
-	| arg |
-	arg := ByteArray new: 8.
-	1 to: 8 do: [:i | arg at: i put: (aFloat basicAt: 8 - i + 1)].
-	^arg! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
-copy: sql withStream: aStream
-
-	| conn |
-	conn := self newConnection.
-	conn startup.
-	conn copy: sql withStream: aStream.
-	conn terminate.! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
-execute: sql on: conn
-
-	| result resultStream |
-
-	resultStream := ReadWriteStream on: String new.
-	result := conn execute: sql.
-	result displayResultOn: resultStream.
-	^ resultStream contents.
-! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:04:01'!
-executeAll: queries
-
-	self executeAll: queries withDelayForMilliseconds: 1000! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
-executeAll: queries withDelayForMilliseconds: millisecondDelay
-
-	| conn result |
-
-	conn := self newConnection.
-	conn startup.
-	queries do: [:each |
-		Transcript nextPutAll: 'QUERY: '; nextPutAll: each; cr; flush.
-		result := conn execute: each.
-		result displayResultOn: Transcript.
-		Transcript flush.
-		millisecondDelay isNil ifFalse: [
-			Transcript nextPutAll: 'Delaying for ', millisecondDelay printString, ' ms...'; cr.
-			(Delay forMilliseconds: millisecondDelay) wait.
-			Transcript flush.
-		].
-	].
-	conn terminate.! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 16:51:10'!
-floatFromByteArray: aByteArray
-	"Convert aByteArray to a Float."
-
-	| word1 word2 aFloat |
-
- "CAVEAT. [NM] changed on 30-oct-2021 this he is not sure about equivalence "	
-
-"
-	word1 := (aByteArray at: 1) bitShift: 24.
-	word1 := word1 bitOr: ((aByteArray at: 2) bitShift: 16).
-	word1 := word1 bitOr: ((aByteArray at: 3) bitShift: 8).
-	word1 := word1 bitOr: ((aByteArray at: 4) bitShift: 0).
-	word2 := (aByteArray at: 5) bitShift: 24.
-	word2 := word2 bitOr: ((aByteArray at: 6) bitShift: 16).
-	word2 := word2 bitOr: ((aByteArray at: 7) bitShift: 8).
-	word2 := word2 bitOr: ((aByteArray at: 8) bitShift: 0).
-
-	aFloat := 0.0.
-	aFloat basicAt: 1 put: word1.
-	aFloat basicAt: 2 put: word2. 
-	
-	"
-	aFloat  _ aByteArray doubleAt: 1 bigEndian: true.
-	
-	^aFloat! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 2/9/2005 21:59'!
-floatFromByteArrayVW: aByteArray
-	"Convert aByteArray to a Float."
-
-	| aFloat |
-	aFloat := ByteArray new: 8.
-	1 to: 8 do: [:i | aFloat at: 8 - i + 1 put: (aByteArray at: i)].
-	aFloat changeClassTo: Double.
-	^aFloat! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
-functionCall: oid arguments: arguments
-
-	| conn result |
-	conn := self newConnection.
-	conn startup.
-	result := conn functionCall: oid arguments: arguments.
-	conn terminate.
-	^ result
-! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:03:18'!
-newConnection
-
-	| con arg |
-	con _ PGConnection new.
-	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
-						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
-	con connectionArgs: arg.
-	^ con 
-	
-	"
-	conn := PGConnection new.
-	(useConnectionDefaults isNil or: [useConnectionDefaults not])
-		ifTrue: [ conn connectionArgs: PGConnection buildDefaultConnectionArgs ]
-		ifFalse: [ PGConnection defaultConnectionArgs: nil. conn connectionArgs: nil ].
-	(notificationSubscriberCount notNil and: [notificationSubscriberCount > 0 ])
-		ifTrue: [
-			1 to: notificationSubscriberCount do: [:i |
-				conn addNotificationSubscriber: PGNotificationSubscriber new]
-		].
-	^ conn
-	"! !
-
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
-tearDown
-
-	PGConnection defaultConnectionArgs: nil.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-createTestCopyInOutTable
-
-	self executeAll: #(
-			'CREATE TABLE TestCopyInOutTable (
-				id integer,
-				name text
-			)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:17:07'!
-createTestFieldConverterTable
-
-	self executeAll: #(
-'CREATE TABLE TestFieldConverterTable (
-aBool1 boolean,
-aBool2 boolean,
-aChar char,
-aChar1 char(1),
-aChar2 char(2),
-anInt2 smallint,
-anInt4 integer,
-anInt8 bigint,
-aFloat4 real,
-aFloat8 double precision,
-aNumeric numeric,
-aDate date,
-aTime time,
-aText text
-)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-createTestTable
-
-	self executeAll: #(
-			'CREATE TABLE products (
-				product_no integer,
-				name text,
-				price numeric
-			)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-dropTestCopyInOutTable
-
-	self executeAll: #(
-			'DROP TABLE TestCopyInOutTable'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-dropTestFieldConverterTable
-
-	self executeAll: #(
-			'DROP TABLE TestFieldConverterTable'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-dropTestTable
-
-	self executeAll: #(
-			'DROP TABLE products'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-makeCopyInOutEos
-	"Answer the COPY IN/OUT end of stream code."
-
-	^ String with: $\ with: $.with: Character lf
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-makeCopyInOutLine: aCollection
-
-	| ws |
-	ws := WriteStream on: (String new: 512).
-	aCollection withIndexDo: [:each :i |
-		ws nextPutAll: each.
-		i < aCollection size ifTrue: [ws tab]
-	].
-	ws nextPut: Character lf.
-	^ ws contents.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-oidAbs
-	"oid 1395 is abs(float8)"
-	^ 1395
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-oidSqrt
-	"oid 1344 is sqrt(float8)"
-	^ 1344
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-oidTimenow
-
-	^ 250
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCancelRequest
-	"Test: CancelRequest.
-
-	Set the debug level of the postmaster daemon to 1 or greater.
-	Capture the postmaster output in a log file.
-	Examine the log file for a cancel request with a matching process id.
-
-	Example, an init.d script containing:
-		su -l postgres -s /bin/sh -c ""/usr/bin/pg_ctl  -D $PGDATA -p /usr/bin/postmaster -o '-i -d 1' start  > /var/log/postgresql/log 2>&1"" < /dev/null
-	yields a line in the log:
-		/usr/bin/postmaster: processCancelRequest: sending SIGINT to process 13142
-	"
-
-	| conn |
-
-	conn := self newConnection.
-	conn startup.
-	conn cancelRequest.
-	conn terminate.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testConnection
-	"Test: connect and disconnect, without any queries."
-
-	self executeAll: #().
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCopyIn1
-
-	| ws conn result |
-	ws := WriteStream on: String new.
-	ws nextPutAll: self makeCopyInOutEos.
-
-	self dropTestCopyInOutTable.
-	self createTestCopyInOutTable.
-
-	conn := self newConnection.
-	conn startup.
-	conn copy: 'copy TestCopyInOutTable from stdin' withStream: ws.
-	result := conn execute: 'select * from TestCopyInOutTable'.
-	conn terminate.
-
-	self assert: result rows size = 0.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCopyIn2
-
-	| ws result conn |
-
-	self dropTestCopyInOutTable.
-	self createTestCopyInOutTable.
-
-	ws := WriteStream on: String new.
-	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
-	ws nextPutAll: self makeCopyInOutEos.
-
-	conn := self newConnection.
-	conn startup.
-	conn copy: 'copy TestCopyInOutTable from stdin' withStream: ws.
-	result := conn execute: 'select * from TestCopyInOutTable'.
-	conn terminate.
-	self assert: result rows size = 1.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCopyOut1
-
-	| ws |
-	self dropTestCopyInOutTable.
-	self createTestCopyInOutTable.
-	ws := WriteStream on: (String new: 512).
-	self copy: 'copy TestCopyInOutTable to stdout' withStream: ws.
-	"Transcript show: ws contents printString; cr."
-	self assert: ws contents = (String with: $\ with: $. with: Character lf).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCopyOut2
-
-	| ws rs |
-
-	ws := WriteStream on: String new.
-	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
-	ws nextPutAll: self makeCopyInOutEos.
-
-	self dropTestCopyInOutTable.
-	self createTestCopyInOutTable.
-	self executeAll: #('insert into TestCopyInOutTable values(77,''abcde'')').
-
-	rs := WriteStream on: (String new: 512).
-	self copy: 'copy TestCopyInOutTable to stdout' withStream: rs.
-
-	self assert: rs contents = ws contents.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testCopyOut3
-
-	| ws rs |
-
-	ws := WriteStream on: String new.
-	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde')).
-	ws nextPutAll: (self makeCopyInOutLine: (Array with: '88' with: 'vwxyz')).
-	ws nextPutAll: self makeCopyInOutEos.
-
-	self dropTestCopyInOutTable.
-	self createTestCopyInOutTable.
-	self executeAll: #('insert into TestCopyInOutTable values(77,''abcde'')').
-	self executeAll: #('insert into TestCopyInOutTable values(88,''vwxyz'')').
-
-	rs := WriteStream on: (String new: 512).
-	self copy: 'copy TestCopyInOutTable to stdout' withStream: rs.
-
-	self assert: rs contents = ws contents.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testExecute1
-
-	self executeAll: #(
-			'select timenow()'
-			'select abs(-1)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testExecute2
-
-	self executeAll: #(
-			'select timenow(); select abs(-1)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testExecuteUsingConnectionDefaults
-
-	useConnectionDefaults := true.
-	self executeAll: #(
-			'select timenow()'
-			'select abs(-1)'
-		).
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testFieldConverter
-	"Test: two different connections can have a different field converter for a given typeOid.
-
-	This capability would be useful when using one image to connect to two different databases,
-	where the same (custom) typeOid is defined differently in each database.
-	"
-
-	| conn1 result1 conn2 result2 newConverter |
-
-	self dropTestTable.
-	self createTestTable.
-
-	conn1 := self newConnection.
-	conn2 := self newConnection.
-	conn1 startup.
-	conn2 startup.
-
-	result1 := conn1 execute: 'INSERT INTO products VALUES (1);'.
-	result1 := conn1 execute: 'select * from products'.
-
-	newConverter := [:value | value].
-	conn2 fieldConverterAt: 20 put: newConverter.
-	conn2 fieldConverterAt: 21 put: newConverter.
-	conn2 fieldConverterAt: 23 put: newConverter.
-	result2 := conn2 execute: 'select * from products'.
-
-	conn1 terminate.
-	conn2 terminate.
-
-	self assert: result1 rows size = 1.
-	self assert: result1 rows first data first = 1.
-
-	self assert: result2 rows size = 1.
-	self assert: result2 rows first data first = '1'.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:51:05'!
-testFieldConverter2
-
-	| conn result data |
-
-	self dropTestFieldConverterTable.
-	self createTestFieldConverterTable.
-
-	conn := self newConnection.
-	conn startup.
-	result := conn execute:
-'INSERT INTO TestFieldConverterTable VALUES (TRUE,FALSE,''A'',''B'',''CD'',77,88,99,11.11,22.22,33.33,''2001-01-01'',''04:05:06'',''abcd'');'.
-	result := conn execute: 'select * from TestFieldConverterTable'.
-	conn terminate.
-
-	self assert: result rows size = 1.
-	data := result rows first data.
-	"result rows first inspect."
-	self assert: (data at: 1).
-	self assert: (data at: 2) not.
-	self assert: (data at: 3) = 'A'.
-	self assert: (data at: 4) = 'B'.
-	self assert: (data at: 5) = 'CD'.
-	self assert: (data at: 6) = 77.
-	self assert: (data at: 7) = 88.
-	self assert: (data at: 8) = 99.
-	self assert: ((data at: 9) - 11.11) abs < 0.0001.
-	self assert: ((data at: 10) - 22.22) abs < 0.0001.
-	self assert: ((data at: 11) - 33.33) abs < 0.0001.
-	"self assert: (data at: 12) = (DateAndTime year: 2001 month: 1 day: 1 hour: 0 minute: 0 second: 0)."
-	self assert: (data at: 12) = (Date newDay: 1 month: 1 year: 2001).
-	self assert: (data at: 13) = (Time fromSeconds: (4*60*60) + (5*60) + 6).
-	self assert: (data at: 14) = 'abcd'.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 2/1/2006 11:37'!
-testFieldConverter3
-
-	| conn result d |
-
-	self dropTestFieldConverterTable.
-	self createTestFieldConverterTable.
-
-	conn := self newConnection.
-	conn startup.
-	result := conn execute:
-'INSERT INTO TestFieldConverterTable VALUES (TRUE,FALSE,''A'',''B'',''CD'',77,88,99,11.11,22.22,33.33,''2001-01-01'',''04:05:06'',''abcd'');'.
-	result := conn execute: 'select * from TestFieldConverterTable'.
-	conn terminate.
-
-	self assert: result rows size = 1.
-	d := result rows first dataKeyedByFieldName.
-	"result rows first inspect."
-	self assert: (d at: 'aBool1' asLowercase).
-	self assert: (d at: 'aBool2' asLowercase) not.
-	self assert: (d at: 'aChar' asLowercase) = 'A'.
-	self assert: (d at: 'aChar1' asLowercase) = 'B'.
-	self assert: (d at: 'aChar2' asLowercase) = 'CD'.
-	self assert: (d at: 'anInt2' asLowercase) = 77.
-	self assert: (d at: 'anInt4' asLowercase) = 88.
-	self assert: (d at: 'anInt8' asLowercase) = 99.
-	self assert: ((d at: 'aFloat4' asLowercase) - 11.11) abs < 0.0001.
-	self assert: ((d at: 'aFloat8' asLowercase) - 22.22) abs < 0.0001.
-	self assert: ((d at: 'aNumeric' asLowercase) - 33.33) abs < 0.0001.
-	"self assert: (d at: 'aDate' asLowercase) = (DateAndTime year: 2001 month: 1 day: 1 hour: 0 minute: 0 second: 0)."
-	self assert: (d at: 'aDate' asLowercase) = (Date newDay: 1 month: 1 year: 2001).
-	self assert: (d at: 'aTime' asLowercase) = (Time fromSeconds: (4*60*60) + (5*60) + 6).
-	self assert: (d at: 'aText' asLowercase) = 'abcd'.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testFunctionCall
-	"Test: make several function calls before terminating."
-
-	| conn result arg |
-	arg := self asFloat8Arg: 1.0.
-	conn := self newConnection.
-	conn startup.
-	result := conn functionCall: self oidTimenow arguments: OrderedCollection new.
-	result := conn functionCall: self oidAbs arguments: (OrderedCollection with: arg).
-	result := conn functionCall: self oidSqrt arguments: (OrderedCollection with: arg).
-	conn terminate.
-	^ result
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testFunctionCall1
-
-	| result |
-	result := self functionCall: self oidTimenow arguments: OrderedCollection new.
-	self assert: result functionResult notNil.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 11/10/2004 23:52'!
-testFunctionCall2
-
-	| arg result |
-	arg := self asFloat8Arg: -1.0.
-	result :=  self functionCall: self oidAbs arguments: (OrderedCollection with: arg).
-	self assert: result functionResult notNil.
-	self assert: (self floatFromByteArray: result functionResult result) = 1.0.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 11/10/2004 23:54'!
-testFunctionCall3
-
-	| arg result |
-	arg := self asFloat8Arg: 1.0.
-	result := self functionCall: self oidSqrt arguments: (OrderedCollection with: arg).
-	self assert: result functionResult notNil.
-	self assert: (self floatFromByteArray: result functionResult result) = 1.0.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testNotify1
-
-	notificationSubscriberCount := 1.
-
-	[
-		self executeAll: #(
-			'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest'
-			'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest' 'notify pgtest'
-		) withDelayForMilliseconds: 1000
-	] fork.
-
-	self executeAll: #(
-		'listen pgtest'
-		'select timenow()'
-		'select timenow()'
-	) withDelayForMilliseconds: 5000
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testNotify2
-	"Test: a NoticeResponse will be sent because there is an extra field on the input line."
-
-	| ws conn |
-
-	notificationSubscriberCount := 2.
-
-	self dropTestTable.
-	self createTestTable.
-
-	ws := WriteStream on: String new.
-	ws nextPutAll: (self makeCopyInOutLine: (Array with: '77' with: 'abcde' with: '123.456' with: '999.999')).
-	ws nextPutAll: self makeCopyInOutEos.
-
-	conn := self newConnection.
-	conn startup.
-	conn copy: 'copy products from stdin' withStream: ws.
-	conn terminate.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testResultSet1
-
-	| conn result |
-
-	self dropTestTable.
-	self createTestTable.
-
-	conn := self newConnection.
-	conn startup.
-	result := conn execute: 'insert into products values(77,''abcde'',123.456)'.
-	result := conn execute: 'select * from products'.
-	conn terminate.
-
-	self assert: result rows size = 1.
-! !
-
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
-testResultSet2
-
-	| conn result rs1 rs2 |
-
-	self dropTestTable.
-	self createTestTable.
-
-	conn := self newConnection.
-	conn startup.
-	result := conn execute: 'insert into products values(49,''abcde'',123.456)'.
-	result := conn execute: 'insert into products values(50,''abcde'',123.456)'.
-	result := conn execute: 'insert into products values(51,''abcde'',123.456)'.
-	result := conn execute: 'insert into products values(52,''abcde'',123.456)'.
-	result := conn execute: 'select * from products; select * from products where product_no > 50'.
-	conn terminate.
-
-	rs1 := result resultSets at: 1.
-	self assert: rs1 rows size = 4.
-
-	rs2 := result resultSets at: 2.
-	self assert: rs2 rows size = 2.
-! !
-
-!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
-regress: testName
-
-	| inStream conn outStream line pos result sql |
-
-	Transcript show: testName, '--starting test'; cr.
-	conn := self newConnection.
-	conn startup.
-
-	inStream := FileStream readOnlyFileNamed: 'u:\lib\pgsql\test\regress\sql\', testName, '.sql'.
-	outStream := FileStream newFileNamed: testName, '.out'.
-	sql := ''.
-	[inStream atEnd] whileFalse: [
-		line := inStream upTo: Character lf.
-		(line beginsWith: '--')
-			ifTrue: [outStream nextPutAll: line; cr].
-		(line size > 0 and: [(line beginsWith: '--') not]) ifTrue: [
-			pos := line findString: '\g'. "\g is psql execute command"
-			pos > 0 ifTrue: [line := line copyFrom: 1 to: pos - 1].
-			sql := sql, line, String cr.
-			(line endsWith: ';') ifTrue: [
-				result := conn execute: sql.
-				Transcript show: sql; flush.
-				outStream nextPutAll: sql.
-				result displayResultOn: outStream.
-				sql := ''.
-			].
-		].
-	].
-	inStream close.
-	outStream close.
-
-	conn terminate.
-	Transcript show: testName, '--test completed'; cr.
-! !
-
-!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
-regressionTestNames
-
-	^#(
-		#('boolean' 'char' 'name' 'varchar' 'text' 'int2' 'int4' 'int8' 'oid' 'float4' 'float8' 'numeric')
-		'strings'
-		'numerology'
-		#('point' 'lseg' 'box' 'path' 'polygon' 'circle' 'interval' 'timestamp' 'reltime' 'tinterval' 'inet' 'comments' 'oidjoins' 'type_sanity' 'opr_sanity')
-		'abstime'
-		'geometry'
-		'horology'
-		'create_function_1'
-		'create_type'
-		'create_table'
-		'create_function_2'
-		'copy'
-		#('constraints' 'triggers' 'create_misc' 'create_aggregate' 'create_operator' 'create_index')
-		'create_view'
-		'sanity_check'
-		'errors'
-		'select'
-		#('select_info' 'select_distinct' 'select_distinct_on' 'select_implicit' 'select_having' 'subselect' 'union' 'case' 'join' 'aggregates' 'transactions' 'random' 'portals' 'arrays' 'btree_index' 'hash_index')
-		'misc'
-		#('select_views' 'alter_table' 'portals_p2' 'rules' 'foreign_key')
-		#('limit' 'plpgsql' 'temp')
-	)! !
-
-!TestPGConnection methodsFor: 'postgres test suite' stamp: 'yj 4/24/2003 23:01'!
-runRegressionTests
-	"TestPGConnection new runRegressionTests"
-
-	self regress: 'drop'.
-	(self regressionTestNames at: 1) do: [:each | self regress: each].
-	"self regressionTestNames do: [:test |
-		test isString
-			ifTrue: [self regress: test]
-			ifFalse: [test do: [:each | self regress: each]]
-	]."
 ! !
 PGPacket initialize!
