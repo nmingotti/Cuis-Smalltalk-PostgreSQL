@@ -7,6 +7,9 @@ has a more general scope than this one, for example it can connect to SQlite. I 
 
 ## Minimal interaction example 
 
+This data come from a 100 kW photovoltaic production plant logger. Of course, night reading are not that interesting,
+but the SQL query is really simple.
+
 ```smalltalk
 Feature require: 'PostgreSQL'. 
 
