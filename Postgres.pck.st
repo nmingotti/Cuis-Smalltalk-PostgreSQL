@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4928] on 17 October 2021 at 7:20:04 pm'!
+'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 4:08:37 pm'!
 'Description '!
-!provides: 'Postgres' 1 15!
+!provides: 'Postgres' 1 16!
 !requires: 'Cuis-Base' 50 4928 nil!
 !requires: 'WebClient' 1 22 nil!
 !requires: 'SqueakCompatibility' 1 31 nil!
@@ -1368,7 +1368,7 @@ buildDefaultConnectionArgs
 		password: 'secret'
 ! !
 
-!PGConnection class methodsFor: 'initialization' stamp: 'yj 2/1/2006 11:37'!
+!PGConnection class methodsFor: 'initialization' stamp: 'NM 10/30/2021 16:06:05'!
 buildDefaultFieldConverters
 	"The type oid's can be found using:
 		SELECT oid,typname from pg_type
@@ -1388,7 +1388,8 @@ buildDefaultFieldConverters
 	#(20 "int8" 21 "int2" 23 "int4" 1005 "_int2" 1007 "_int4" 1016 "_int8")
 		do: [:each | converters at: each put: [:s | Number readFrom: (ReadStream on: s)]].
 
-	#(700 "float4" 701 "float8" 1021 "_float4" 1022 "_float8" 1700 "numeric")
+       "[NM] last entries added on 30-oct-2021"
+	#(700 "float4" 701 "float8" 1021 "_float4" 1022 "_float8" 1700 "numeric" 850 "real" 851 "double" 9900 "numeric")
 		do: [:each | converters at: each put: [:s | (Number readFrom: (ReadStream on: s)) asFloat]].
 
 	dateBlock :=
@@ -1924,7 +1925,7 @@ displayOn: aStream
 	].
 ! !
 
-!PGAsciiRow methodsFor: 'accessing' stamp: 'yj 4/24/2003 23:01'!
+!PGAsciiRow methodsFor: 'accessing' stamp: 'NM 10/30/2021 16:06:38'!
 data
 
 	| converters converter data |
@@ -2753,10 +2754,10 @@ execute: sql on: conn
 	^ resultStream contents.
 ! !
 
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:04:01'!
 executeAll: queries
 
-	self executeAll: queries withDelayForMilliseconds: nil! !
+	self executeAll: queries withDelayForMilliseconds: 1000! !
 
 !TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
 executeAll: queries withDelayForMilliseconds: millisecondDelay
@@ -2819,11 +2820,17 @@ functionCall: oid arguments: arguments
 	^ result
 ! !
 
-!TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 15:03:18'!
 newConnection
 
-	| conn |
-
+	| con arg |
+	con _ PGConnection new.
+	arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 
+						    databaseName: 'test1' userName: 'foo' 							password: 'foopass'.  
+	con connectionArgs: arg.
+	^ con 
+	
+	"
 	conn := PGConnection new.
 	(useConnectionDefaults isNil or: [useConnectionDefaults not])
 		ifTrue: [ conn connectionArgs: PGConnection buildDefaultConnectionArgs ]
@@ -2834,7 +2841,7 @@ newConnection
 				conn addNotificationSubscriber: PGNotificationSubscriber new]
 		].
 	^ conn
-! !
+	"! !
 
 !TestPGConnection methodsFor: 'private' stamp: 'yj 4/24/2003 23:01'!
 tearDown
@@ -2853,7 +2860,7 @@ createTestCopyInOutTable
 		).
 ! !
 
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 4/24/2003 23:01'!
+!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:17:07'!
 createTestFieldConverterTable
 
 	self executeAll: #(
@@ -2863,11 +2870,11 @@ aBool2 boolean,
 aChar char,
 aChar1 char(1),
 aChar2 char(2),
-anInt2 int2,
-anInt4 int4,
-anInt8 int8,
-aFloat4 float4,
-aFloat8 float8,
+anInt2 smallint,
+anInt4 integer,
+anInt8 bigint,
+aFloat4 real,
+aFloat8 double precision,
 aNumeric numeric,
 aDate date,
 aTime time,
@@ -3134,7 +3141,7 @@ testFieldConverter
 	self assert: result2 rows first data first = '1'.
 ! !
 
-!TestPGConnection methodsFor: 'tests' stamp: 'yj 2/1/2006 11:37'!
+!TestPGConnection methodsFor: 'tests' stamp: 'NM 10/30/2021 15:51:05'!
 testFieldConverter2
 
 	| conn result data |
