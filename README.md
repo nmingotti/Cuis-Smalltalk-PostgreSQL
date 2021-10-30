@@ -1,11 +1,18 @@
 # Cuis-Smalltalk-PostgreSQL
 * *Cuis* interface to *PosgresSQL*
 * Port to Cuis of an old *Squeak* software. Original author: *Yanni Chiu*. Original files & info [here](http://map.squeak.org/package/a8d3ca99-f5f4-45e0-9aa7-100a77b64f45). Version used for the port *3.1* which was last updated on 01-Feb-2006.
+* At 30-Oct-2021 all the 21 original tests provided in 2006 are green. CAVEAT. see the developr notes at the end.  
 * There is [another package](https://github.com/Phantasus/Cuis-Smalltalk-Postgres) for DB connection from Cuis which is comes from a *Pharo* release and
 has a more general scope than this one, for example it can connect to SQlite. I have not tried it
 but we may join efforts in the future. 
 
-## How to test this software 
+## Minimal interaction example 
+
+```smalltalk
+
+```
+
+## How to run the tests 
 * It is supposed you have a Postgres database on one of your computer where you can test.
 * In my case it is the computer called **db1**, there **Postgres-13** runs in a **Linux/Debian-11**.
 * **SECURITY NOTE**. The machine **db1** is in my office LAN so I don't need to worry too much about unwanted logins.
@@ -36,4 +43,16 @@ $> sudo systemctl restart postgresql.service
 ```
 $> psql -h db1.borghi.lan -U foo -d test1
 ```
-* If all went fine you are ready to start interacting from Cuis-Smalltalk  
+* Now you need to modify `TestPGConnectio>>newConnection` in the *private* category and put your server data and run the tests as usual.
+
+## Developer notes 
+* I kept all the tests coming from the 2006 release of this package but I had to make a few changes.
+* I added a few oid for data types: Real, Double, Numeric in `PGConnection(class)>>buildDefaultFieldConverters`. I used
+  the oid I could read coming from Postgres in the rawdata.
+* I rewrote the logic of `testNotify2` because I did not get how the original test was supposed to pass.
+* I had to change `TestPGConnection>>floatFromByteArray` (private category) but here I am not sure my code is equivalent to the original.
+ 
+
+
+
+
