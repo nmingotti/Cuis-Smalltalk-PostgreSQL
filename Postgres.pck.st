@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 4:08:37 pm'!
+'From Cuis 5.0 [latest update: #4958] on 30 October 2021 at 4:53:05 pm'!
 'Description '!
-!provides: 'Postgres' 1 16!
+!provides: 'Postgres' 1 17!
 !requires: 'Cuis-Base' 50 4928 nil!
 !requires: 'WebClient' 1 22 nil!
 !requires: 'SqueakCompatibility' 1 31 nil!
@@ -2779,12 +2779,15 @@ executeAll: queries withDelayForMilliseconds: millisecondDelay
 	].
 	conn terminate.! !
 
-!TestPGConnection methodsFor: 'private' stamp: 'yj 11/10/2004 23:52'!
+!TestPGConnection methodsFor: 'private' stamp: 'NM 10/30/2021 16:51:10'!
 floatFromByteArray: aByteArray
 	"Convert aByteArray to a Float."
 
 	| word1 word2 aFloat |
 
+ "CAVEAT. [NM] changed on 30-oct-2021 this he is not sure about equivalence "	
+
+"
 	word1 := (aByteArray at: 1) bitShift: 24.
 	word1 := word1 bitOr: ((aByteArray at: 2) bitShift: 16).
 	word1 := word1 bitOr: ((aByteArray at: 3) bitShift: 8).
@@ -2796,7 +2799,11 @@ floatFromByteArray: aByteArray
 
 	aFloat := 0.0.
 	aFloat basicAt: 1 put: word1.
-	aFloat basicAt: 2 put: word2.
+	aFloat basicAt: 2 put: word2. 
+	
+	"
+	aFloat  _ aByteArray doubleAt: 1 bigEndian: true.
+	
 	^aFloat! !
 
 !TestPGConnection methodsFor: 'private' stamp: 'yj 2/9/2005 21:59'!
