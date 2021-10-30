@@ -9,7 +9,45 @@ but we may join efforts in the future.
 ## Minimal interaction example 
 
 ```smalltalk
+Feature require: 'Postgres'. 
 
+". get data from the a database "
+con _ PGConnection new.
+arg _ PGConnectionArgs hostname: 'db1.borghi.lan' portno: 5432 databaseName: 'solare'
+                       userName: 'myuser' 	password: 'fooBarBaz'.  
+con connectionArgs: arg.
+con startup .
+out _ con execute: 'SELECT * FROM ftv1 LIMIT 10'.  
+con terminate.
+
+". see what is in out output variable "
+out class.    "=> PGResult "
+
+". get columns info, observe here you see colun name and Postgres datatype "
+out rowDescription columnDescriptions . "=> an OrderedCollection(
+PGColumnDescription(fieldName='istante',typeOid=1114,typeSize=8,typeModifier=4294967295) PGColumnDescription(fieldName='produzione',typeOid=23,typeSize=4,typeModifier=4294967295) PGColumnDescription(fieldName='consumo',typeOid=23,typeSize=4,typeModifier=4294967295)) "
+
+". see the first row, unparsed, all fields are String "
+out rows first .       "=> PGAsciiRow('2017-08-07 23:05:00','279','1350',) "
+
+". see the first row, parsed"
+out rows first data.   "=> an OrderedCollection(2017-08-07T23:05:00+00:00 279 1350) "
+
+". this is useful to make a table"
+Feature require: 'Printf'. 
+
+". write a data table to Transcript, even if in Smalltalk we can do better than that"	
+ws _ (String new: 10000) writeStream. 
+rowNames _ out rowDescription columnDescriptions collect: [ :r | r fieldName ] . 
+ws nextPutAll: ('\n\n-------------------------------------------------------------------- \n' printf: {} ).
+ws nextPutAll: ('%30s | %15s | %10s \n' printf: rowNames ).
+ws nextPutAll: ('-------------------------------------------------------------------- \n' printf: {}).
+out rows do: [ :r | |fields| 
+	fields _ r data collect: [ :x | x asString ]. 
+	ws nextPutAll: ('%30s | %15s | %10s \n' printf: fields)
+	].
+ws close. 
+Transcript show: (ws contents). 
 ```
 
 ## Security warning
