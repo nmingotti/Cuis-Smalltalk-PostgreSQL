@@ -68,6 +68,9 @@ to your server ssh, which is very strong on this.
 * Write a GUI for interactions
 * It would be nice to have some default readable text output in Transcript. Problem: the default font in Transcript is
   not monospace. It does not seem wise to change that.
+* It depends on **WebClient** for the **md5** algorithm. Maybe better just to copy the algorithm here, since it is also outdated,
+it may get cancelled from the other package sooner or later.
+* In a second check see if it is reasonable to keep the dependency on package **SqueakCompatibility**.
 
   
 ## How to run the tests 
